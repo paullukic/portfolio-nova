@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PAUL_LUKIC — OG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&family=Zen+Dots&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --void: #050507;
+        --deck: #0b0c10;
+        --bone: #eaeaea;
+        --cyan: #00f0ff;
+        --mag: #ff1f8e;
+        --acid: #defb00;
+        --ash: #8b8d94;
+        --fade: #4d5058;
+        --rule: #1a1d24;
+        --rule-strong: #2a2e38;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        width: 1200px;
+        height: 630px;
+        background: var(--void);
+        color: var(--bone);
+        font-family: "Chakra Petch", system-ui, sans-serif;
+        overflow: hidden;
+      }
+      .canvas {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        background:
+          radial-gradient(ellipse at 85% 20%, rgba(0,240,255,0.10) 0%, transparent 50%),
+          radial-gradient(ellipse at 15% 85%, rgba(255,31,142,0.10) 0%, transparent 55%),
+          var(--void);
+        overflow: hidden;
+        font-feature-settings: "ss01", "ss02";
+      }
+      .grid {
+        position: absolute; inset: 0;
+        background-image:
+          linear-gradient(rgba(0,240,255,0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0,240,255,0.08) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+      }
+      .scanlines::before {
+        content: "";
+        position: absolute; inset: 0;
+        background: repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.018) 0 1px,
+          transparent 1px 3px
+        );
+        pointer-events: none;
+      }
+      .corner { position: absolute; width: 22px; height: 22px; border: 1px solid var(--cyan); }
+      .corner.tl { top: 28px; left: 28px; border-right: 0; border-bottom: 0; }
+      .corner.tr { top: 28px; right: 28px; border-left: 0; border-bottom: 0; border-color: var(--mag); }
+      .corner.bl { bottom: 28px; left: 28px; border-right: 0; border-top: 0; border-color: var(--acid); }
+      .corner.br { bottom: 28px; right: 28px; border-left: 0; border-top: 0; }
+
+      .top-strip {
+        position: absolute; top: 56px; left: 64px; right: 64px;
+        display: flex; justify-content: space-between; align-items: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px; letter-spacing: 0.28em; text-transform: uppercase;
+      }
+      .top-strip .left { color: var(--cyan); display: flex; gap: 10px; align-items: center; }
+      .top-strip .dot { width: 8px; height: 8px; background: var(--acid); border-radius: 999px; }
+      .top-strip .right { color: var(--fade); }
+
+      .badge {
+        display: inline-grid; place-items: center;
+        width: 44px; height: 44px; border: 1px solid var(--cyan);
+        color: var(--cyan); font-weight: 700; font-size: 13px;
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.1em;
+      }
+
+      .main {
+        position: absolute;
+        top: 120px; left: 64px; right: 64px; bottom: 160px;
+        display: flex; flex-direction: column; justify-content: center;
+      }
+      .eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 15px; letter-spacing: 0.32em; text-transform: uppercase;
+        color: var(--cyan);
+        text-shadow: 0 0 8px rgba(0,240,255,0.5);
+      }
+      .eyebrow span.fade { color: var(--fade); margin-right: 8px; }
+      .name {
+        margin-top: 12px;
+        font-family: "Chakra Petch", sans-serif;
+        font-weight: 300;
+        font-size: 190px;
+        letter-spacing: -0.04em;
+        line-height: 0.86;
+        text-transform: uppercase;
+      }
+      .name .last {
+        font-style: italic;
+        color: var(--bone);
+        text-shadow: 0 0 18px rgba(0,240,255,0.35);
+      }
+      .name sup {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        color: var(--mag);
+        vertical-align: top;
+        margin-left: 14px;
+        text-shadow: 0 0 10px rgba(255,31,142,0.5);
+      }
+
+      .tag {
+        margin-top: 36px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ash);
+      }
+      .tag .accent { color: var(--cyan); }
+      .tag .mag { color: var(--mag); }
+      .tag .acid { color: var(--acid); }
+
+      .bottom-strip {
+        position: absolute; left: 64px; right: 64px; bottom: 52px;
+        display: flex; justify-content: space-between; align-items: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px; letter-spacing: 0.28em; text-transform: uppercase;
+      }
+      .bottom-strip .url { color: var(--bone); font-weight: 500; }
+      .bottom-strip .url .dim { color: var(--fade); }
+      .bottom-strip .meta { color: var(--fade); display: flex; gap: 16px; }
+      .bottom-strip .meta span .c { color: var(--cyan); }
+      .bottom-strip .meta .sep { color: var(--rule-strong); }
+
+      .accent-strip {
+        position: absolute; bottom: 0; left: 0;
+        height: 4px; width: 280px;
+        background: linear-gradient(90deg, var(--cyan), var(--mag), var(--acid));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas scanlines">
+      <div class="grid"></div>
+      <span class="corner tl"></span>
+      <span class="corner tr"></span>
+      <span class="corner bl"></span>
+      <span class="corner br"></span>
+
+      <div class="top-strip">
+        <div class="left">
+          <span class="dot"></span>
+          NETRUNNER_ARCHIVE · V2026
+        </div>
+        <div class="right">FILE · PL-94-001</div>
+      </div>
+
+      <div class="main">
+        <div class="eyebrow">
+          <span class="fade">&gt;&gt;</span> SUBJECT_PROFILE · SENIOR FULL-STACK · JAVA · SPRING · REACT · SVELTE
+        </div>
+        <h1 class="name">
+          PAUL<br>
+          <span class="last">LUKIĆ<sup>/lu·kitch/</sup></span>
+        </h1>
+        <div class="tag">
+          <span class="accent">//</span> SIX_YEARS ·
+          <span class="mag">150 MAU</span> ·
+          <span class="acid">2K+ USERS</span> ·
+          <span class="accent">OPEN_TO_ROLES</span>
+        </div>
+      </div>
+
+      <div class="bottom-strip">
+        <div class="url"><span class="dim">&gt;</span> paullukic.dev</div>
+        <div class="meta">
+          <span>NOVI_SAD · <span class="c">CET</span></span>
+          <span class="sep">·</span>
+          <span>REPLY ≤ 24H</span>
+        </div>
+      </div>
+
+      <div class="accent-strip"></div>
+    </div>
+  </body>
+</html>
