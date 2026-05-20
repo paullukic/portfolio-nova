@@ -37,6 +37,7 @@
     --tone-mag-hex: #ff1f8e;
     --tone-acid-hex: #defb00;
     --tone-amber-hex: #ffb400;
+    --tone-blood-hex: #ff3b3b;
   }
 
   /* Theme variants — swap the accent palette globally via data-theme on html.
@@ -54,6 +55,7 @@
     --tone-mag-hex: #ffb400;
     --tone-acid-hex: #ff1f8e;
     --tone-amber-hex: #defb00;
+    --tone-blood-hex: #00f0ff;
   }
   html[data-theme="matrix"] {
     --color-cyan: #39ff14;
@@ -65,6 +67,7 @@
     --tone-mag-hex: #00f0ff;
     --tone-acid-hex: #defb00;
     --tone-amber-hex: #ffb400;
+    --tone-blood-hex: #ff3b3b;
   }
 
   html {
@@ -246,6 +249,11 @@
     text-shadow:
       0 0 6px color-mix(in srgb, var(--tone-acid-hex) 60%, transparent),
       0 0 22px color-mix(in srgb, var(--tone-acid-hex) 35%, transparent);
+  }
+  .glow-blood {
+    text-shadow:
+      0 0 8px color-mix(in srgb, var(--tone-blood-hex) 60%, transparent),
+      0 0 26px color-mix(in srgb, var(--tone-blood-hex) 38%, transparent);
   }
   .border-glow-cyan {
     box-shadow:

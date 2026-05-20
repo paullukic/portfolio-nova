@@ -4,12 +4,27 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 type Entry = {
   version: string;
   date: string;
-  tone: "cyan" | "mag" | "acid" | "amber";
+  tone: "cyan" | "mag" | "acid" | "amber" | "blood";
   summary: string;
   bullets: string[];
 };
 
 const CHANGELOG: Entry[] = [
+  {
+    version: "v2026.05",
+    date: "2026-05-20",
+    tone: "blood",
+    summary: "Coograph added as flagship · blood tone · ledger entry · drawer scroll fix.",
+    bullets: [
+      "SELECTED_WORK: COOGRAPH promoted to slot 01 — feature card, blood tone (red), force-directed graph diagram",
+      "CAREER_LEDGER: COOGRAPH entry at top — OSS · graph-first AI coding workflow",
+      "Press strip + Marquee + Now feed updated to surface COOGRAPH",
+      "New `blood` tone wired across theme (CSS var, glow class, tone unions in Selected/CaseDrawer/PressStrip/Ledger)",
+      "CaseDrawer: fixed scroll inside drawer (Lenis was hijacking wheel) via data-lenis-prevent + overscroll-contain",
+      "Selected card DETAIL + VISIT buttons: bumped left padding for breathing room",
+      "Cybergrid downgraded feature → wide so Coograph dominates the grid alone",
+    ],
+  },
   {
     version: "v2026.04",
     date: "2026-04-23",
@@ -93,6 +108,8 @@ function Release({ entry, defaultOpen }: { entry: Entry; defaultOpen: boolean })
       ? "text-mag glow-mag"
       : entry.tone === "acid"
       ? "text-acid glow-acid"
+      : entry.tone === "blood"
+      ? "text-blood glow-blood"
       : "text-amber";
   const bg =
     entry.tone === "cyan"
@@ -101,6 +118,8 @@ function Release({ entry, defaultOpen }: { entry: Entry; defaultOpen: boolean })
       ? "bg-mag"
       : entry.tone === "acid"
       ? "bg-acid"
+      : entry.tone === "blood"
+      ? "bg-blood"
       : "bg-amber";
   return (
     <li className="border border-rule-strong bg-deck/60">

@@ -400,7 +400,77 @@ function DiagramShop() {
   );
 }
 
+export function DiagramGraph() {
+  /* Force-directed code graph — COOGRAPH */
+  const nodes: { x: number; y: number; r: number }[] = [
+    { x: 100, y: 70, r: 7 },
+    { x: 45, y: 35, r: 4 },
+    { x: 160, y: 30, r: 5 },
+    { x: 180, y: 80, r: 4 },
+    { x: 140, y: 115, r: 5 },
+    { x: 60, y: 110, r: 4 },
+    { x: 25, y: 75, r: 3 },
+    { x: 95, y: 20, r: 3 },
+    { x: 200, y: 55, r: 3 },
+  ];
+  const edges: [number, number][] = [
+    [0, 1], [0, 2], [0, 3], [0, 4], [0, 5],
+    [1, 6], [1, 7], [2, 7], [2, 8], [3, 8],
+    [3, 4], [4, 5], [5, 6],
+  ];
+  return (
+    <svg viewBox="0 0 220 140" className="h-full w-full">
+      {edges.map(([a, b], i) => (
+        <line
+          key={`e${i}`}
+          x1={nodes[a].x}
+          y1={nodes[a].y}
+          x2={nodes[b].x}
+          y2={nodes[b].y}
+          stroke="currentColor"
+          strokeOpacity={0.35}
+          strokeWidth={0.7}
+        >
+          <animate
+            attributeName="stroke-opacity"
+            values="0.15;0.7;0.15"
+            dur={`${2.5 + (i % 4) * 0.4}s`}
+            repeatCount="indefinite"
+          />
+        </line>
+      ))}
+      {nodes.map((n, i) => (
+        <g key={`n${i}`}>
+          <circle cx={n.x} cy={n.y} r={n.r} fill="currentColor" />
+          <circle
+            cx={n.x}
+            cy={n.y}
+            r={n.r + 4}
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity={0.5}
+          >
+            <animate
+              attributeName="r"
+              values={`${n.r};${n.r + 10};${n.r}`}
+              dur={`${2 + i * 0.3}s`}
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="stroke-opacity"
+              values="0.5;0;0.5"
+              dur={`${2 + i * 0.3}s`}
+              repeatCount="indefinite"
+            />
+          </circle>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 export function DiagramFor(title: string) {
+  if (title.includes("COOGRAPH")) return <DiagramGraph />;
   if (title.includes("CYBERGRID")) return <DiagramGrid />;
   if (title.includes("COLLABWRITING") || title.includes("CLUING")) return <DiagramHighlight />;
   if (title.includes("GASTARBAJTER")) return <DiagramMap />;

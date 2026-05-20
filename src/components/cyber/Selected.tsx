@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, Cpu, Eye, Shield, Zap, Layers, Globe, Code2, Activity, FileSearch, Smartphone } from "lucide-react";
+import { ArrowUpRight, Cpu, Eye, Shield, Zap, Layers, Globe, Code2, Activity, FileSearch, Smartphone, Network } from "lucide-react";
 import { DecodeOnView } from "./GlitchText";
 import { SectionWatermark } from "./SectionWatermark";
 import { HoloCard } from "./HoloCard";
@@ -14,7 +14,7 @@ type Project = {
   blurb: string;
   tags: string[];
   status: string;
-  tone: "cyan" | "mag" | "acid" | "amber";
+  tone: "cyan" | "mag" | "acid" | "amber" | "blood";
   icon: ReactNode;
   link?: string;
   span: "wide" | "tall" | "default" | "feature";
@@ -25,6 +25,48 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     no: "01",
+    title: "COOGRAPH",
+    client: "OSS · 2026 → ongoing · Solo author",
+    blurb:
+      "Open-source graph-first context layer for AI coding. One workflow, eight tools (Claude Code, Copilot, Codex, OpenCode, Cursor, Windsurf, Aider, Cline). SQLite + tree-sitter code graph served over MCP — replaces grep-then-read with targeted dependency queries. Ships specialized agents, Claude Code lifecycle hooks, and the OpenSpec proposal flow.",
+    tags: ["MCP", "SQLITE", "TREE_SITTER", "PYTHON", "CLAUDE_CODE", "OPENSPEC", "MIT"],
+    status: "LIVE",
+    tone: "blood",
+    icon: <Network className="h-7 w-7" />,
+    link: "https://coograph.com",
+    span: "feature",
+    metrics: [
+      { k: "8", v: "AI tools wired" },
+      { k: "MCP", v: "code-graph server" },
+      { k: "MIT", v: "open source" },
+    ],
+    caseStudy: {
+      problem:
+        "AI coding assistants brute-force the codebase: grep a symbol, get 80+ hits, read 30 files, burn 50K tokens before doing useful work. Different tools (Claude Code, Copilot, Codex, Cursor, etc.) need separately authored configs, so a 'workflow' fragments into eight half-finished setups. Outputs hallucinate symbols and APIs the codebase never actually exports.",
+      approach: [
+        "Built a unified config layout that ships native invocation for all eight major AI coding tools — same workflow, same agent definitions, same skills — installed in ~2 minutes via /coograph-init",
+        "Wrote a standalone Python MCP server that parses the workspace into a SQLite dependency graph via tree-sitter (Java/TS/Python/Go/Rust/C#/Ruby/more), updated incrementally on every commit via git hooks",
+        "Designed five specialized agents — Planner, Reviewer, Debugger, Verifier, Explore — with hard anti-hallucination constraints: every finding cites a verbatim quote from a fresh read, agents must call code-graph before any file read, three-retry circuit breakers on fixes",
+        "Shipped Claude Code lifecycle hooks that block edits to generated files, log every bash command to a two-tier audit trail, warn on out-of-scope edits, and report graph state at session start",
+        "Added the OpenSpec workflow — Plan → Propose → Apply → QA → Review → Archive — with a project-sync layer so template updates propagate to every registered project on `git pull`",
+        "Built an interactive D3 force-directed visualizer so users can see what the agent sees before they trust it",
+      ],
+      challenges: [
+        "No single command works across all eight tools — each registers custom workflows differently (slash commands, $-prefixed skills, rules files, plugin events). Had to author eight invocation paths that all converge on the same agent procedures",
+        "Three of eight tools expose no pre-tool-use hook API, so the audit-log feature is honest about partial coverage rather than faking it across the board",
+        "Cross-platform append safety for the audit log: lines from concurrent agents had to interleave at line boundaries on both POSIX (O_APPEND) and NTFS (FILE_APPEND_DATA)",
+      ],
+      outcome:
+        "Live at coograph.com, MIT-licensed, public roadmap. Real measured behavior: get_minimal_context() returns 4-6 relevant files in ~2K tokens vs. 50K+ tokens grepping 200+. Documented compare-and-contrast against cookiecutter, plain CLAUDE.md, and raw Cursor rules — Coograph scaffolds a workflow, not files.",
+      stack: [
+        "Python", "SQLite", "tree-sitter", "MCP (Model Context Protocol)",
+        "D3", "Claude Code hooks", "OpenSpec", "Git hooks",
+        "TypeScript (OpenCode plugin)", "TOML (Codex config)", "Markdown",
+      ],
+    },
+  },
+  {
+    no: "02",
     title: "CYBERGRID_PLATFORM",
     client: "INVT · 2025 → present · Backend",
     blurb:
@@ -34,7 +76,7 @@ const PROJECTS: Project[] = [
     tone: "cyan",
     icon: <Activity className="h-7 w-7" />,
     link: "https://www.cyber-grid.com",
-    span: "feature",
+    span: "tall",
     metrics: [
       { k: "MQTT", v: "protocol fix" },
       { k: "multi-repo", v: "HTTP migration" },
@@ -63,8 +105,8 @@ const PROJECTS: Project[] = [
     },
   },
   {
-    no: "02",
-    title: "CLUING_NEXUS",
+    no: "03",
+    title: "CLUING",
     client: "Cluing (ex-Colabwriting) · 2023 → 2025 · Full-Stack + Mentor",
     blurb:
       "Research SaaS for serious readers (rebranded from Colabwriting to Cluing). Rebuilt the core highlight engine four times chasing peak performance, shipped a custom PDF viewer with CORS bypass, social scrapers (Reddit/X/Quora/YT/LinkedIn), Kindle notes sync, Tiptap editor, fuzzy AI search and a theming system. Mentored juniors and set long-term code quality direction.",
@@ -102,7 +144,7 @@ const PROJECTS: Project[] = [
     },
   },
   {
-    no: "03",
+    no: "04",
     title: "GASTARBAJTER24",
     client: "Solo founder · 2024 → ongoing · Product + Eng",
     blurb:
@@ -138,7 +180,7 @@ const PROJECTS: Project[] = [
     },
   },
   {
-    no: "04",
+    no: "05",
     title: "IGELPHONE",
     client: "Solo build · 2024 → ongoing · Full-Stack + Admin",
     blurb:
@@ -178,7 +220,7 @@ const PROJECTS: Project[] = [
     },
   },
   {
-    no: "05",
+    no: "06",
     title: "TEODESK_TIMELINE",
     client: "Teodesk · 2020 → 2023 · Full-Stack",
     blurb:
@@ -195,7 +237,7 @@ const PROJECTS: Project[] = [
     ],
   },
   {
-    no: "06",
+    no: "07",
     title: "ARCADE_SUITE",
     client: "4bees · 2023 · Game / Frontend",
     blurb:
@@ -212,7 +254,7 @@ const PROJECTS: Project[] = [
     ],
   },
   {
-    no: "07",
+    no: "08",
     title: "RESULT_COUNTER",
     client: "Solo · 2021 → exited",
     blurb:
@@ -241,7 +283,7 @@ const PROJECTS: Project[] = [
     },
   },
   {
-    no: "08",
+    no: "09",
     title: "COR_TECH_UI_MATRIX",
     client: "Cor Tech US LLC · 2020 · UI/UX",
     blurb:
@@ -257,7 +299,7 @@ const PROJECTS: Project[] = [
     ],
   },
   {
-    no: "09",
+    no: "10",
     title: "PAXHAX",
     client: "Personal · 2022 → ongoing",
     blurb:
@@ -280,24 +322,28 @@ const toneText = {
   mag: "text-mag",
   acid: "text-acid",
   amber: "text-amber",
+  blood: "text-blood",
 };
 const toneGlow = {
   cyan: "glow-cyan",
   mag: "glow-mag",
   acid: "glow-acid",
   amber: "",
+  blood: "glow-blood",
 };
 const toneBg = {
   cyan: "bg-cyan",
   mag: "bg-mag",
   acid: "bg-acid",
   amber: "bg-amber",
+  blood: "bg-blood",
 };
 const toneBorder = {
   cyan: "border-cyan/60",
   mag: "border-mag/60",
   acid: "border-acid/60",
   amber: "border-amber/60",
+  blood: "border-blood/60",
 };
 
 export function Selected() {
@@ -577,7 +623,7 @@ function Plate({ project, onOpen }: { project: Project; onOpen: () => void }) {
 
             <div className="relative z-40 flex items-center gap-1.5 shrink-0">
               <span
-                className="clip-cta inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.24em] font-bold border"
+                className="clip-cta inline-flex items-center gap-1.5 pl-5 pr-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.24em] font-bold border"
                 style={{ borderColor: alpha(40), color: hex, background: alpha(8) }}
               >
                 <FileSearch className="h-3 w-3" />
@@ -589,7 +635,7 @@ function Plate({ project, onOpen }: { project: Project; onOpen: () => void }) {
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="clip-cta inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.24em] font-bold transition-all hover:translate-x-0.5"
+                  className="clip-cta inline-flex items-center gap-1.5 pl-5 pr-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.24em] font-bold transition-all hover:translate-x-0.5"
                   style={{ background: hex, color: "#050507" }}
                 >
                   VISIT

@@ -9,7 +9,7 @@ const SHIPPING = [
   { k: "INVT / Cybergrid", v: "MQTT · observability", active: true },
   { k: "Igelphone.de", v: "store + admin panel", active: true },
   { k: "Gastarbajter24", v: "new vertical · growth", active: true },
-  { k: "Copilot-template", v: "AI-coding workflow", active: true },
+  { k: "Coograph", v: "OSS · graph-first AI workflow", active: true },
   { k: "Portfolio v3", v: "this dossier — live", active: true },
 ];
 

@@ -49,11 +49,11 @@ const COMMANDS: Record<
       if (sub === "projects" || !sub) {
         return [
           "PROJECTS:",
-          "  01  CYBERGRID_PLATFORM    INVT · SHIPPING",
-          "  02  CLUING_NEXUS          Cluing · LIVE",
-          "  03  GASTARBAJTER24        Solo · ONGOING · 150 MAU",
-          "  04  IGELPHONE             Solo · ONGOING · DE STORE + ADMIN",
-          "  05  COPILOT_TEMPLATE      OSS · AI-CODING WORKFLOW",
+          "  01  COOGRAPH              OSS · LIVE · coograph.com",
+          "  02  CYBERGRID_PLATFORM    INVT · SHIPPING",
+          "  03  CLUING                Cluing · LIVE",
+          "  04  GASTARBAJTER24        Solo · ONGOING · 150 MAU",
+          "  05  IGELPHONE             Solo · ONGOING · DE STORE + ADMIN",
           "  06  TEODESK_TIMELINE      Teodesk · ARCHIVED",
           "  07  ARCADE_SUITE          4bees · DELIVERED",
           "  08  RESULT_COUNTER        Chrome · ACQUIRED",

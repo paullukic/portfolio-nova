@@ -21,9 +21,14 @@ const TOP = [
   "MYSQL",
   "KNOCKOUT.JS",
   "CANVAS",
+  "MCP",
+  "SQLITE",
+  "TREE_SITTER",
+  "PYTHON",
 ];
 
 const BOT = [
+  "// COOGRAPH",
   "// CYBERGRID",
   "// COLLABWRITING",
   "// GASTARBAJTER24",

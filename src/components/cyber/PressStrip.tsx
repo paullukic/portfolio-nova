@@ -1,6 +1,7 @@
 import { HoverDecode } from "./GlitchText";
 
 const NODES = [
+  { label: "COOGRAPH", sub: "OSS · 2026—NOW", tone: "blood" },
   { label: "INVT", sub: "CYBERGRID · 2025—NOW", tone: "cyan" },
   { label: "CLUING", sub: "EX-COLABWRITING · 23—25", tone: "mag" },
   { label: "GASTARBAJTER24", sub: "SOLO · 2024—NOW", tone: "acid" },
@@ -24,11 +25,11 @@ export function PressStrip() {
           <span className="text-ash">TRANSMITTED_FROM</span>
           <span className="inline-block h-px w-6 bg-cyan" />
           <span className="ml-auto hidden md:inline text-fade">
-            ▦ 8 NODES · CLIENT + SOLO
+            ▦ 9 NODES · OSS + CLIENT + SOLO
           </span>
         </div>
 
-        <ul className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-px bg-rule-strong border border-rule-strong">
+        <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-px bg-rule-strong border border-rule-strong">
           {NODES.map((n, i) => (
             <li
               key={n.label}
@@ -44,6 +45,8 @@ export function PressStrip() {
                       ? "bg-mag"
                       : n.tone === "acid"
                       ? "bg-acid"
+                      : n.tone === "blood"
+                      ? "bg-blood"
                       : "bg-amber"
                   }`}
                 />
@@ -55,6 +58,8 @@ export function PressStrip() {
                       ? "group-hover:text-mag"
                       : n.tone === "acid"
                       ? "group-hover:text-acid"
+                      : n.tone === "blood"
+                      ? "group-hover:text-blood"
                       : "group-hover:text-amber"
                   }`}
                 >

@@ -14,7 +14,7 @@ export type DrawerProject = {
   no: string;
   title: string;
   client: string;
-  tone: "cyan" | "mag" | "acid" | "amber";
+  tone: "cyan" | "mag" | "acid" | "amber" | "blood";
   blurb: string;
   status: string;
   tags: string[];
@@ -119,7 +119,8 @@ export function CaseDrawer({
           if (el && open) el.scrollTop = 0;
         }}
         key={project?.no ?? "closed"}
-        className={`fixed right-0 top-0 bottom-0 z-[70] w-full sm:w-[min(720px,92vw)] bg-deck border-l border-rule-strong shadow-2xl transition-transform duration-300 ease-out overflow-y-auto ${
+        data-lenis-prevent
+        className={`fixed right-0 top-0 bottom-0 z-[70] w-full sm:w-[min(720px,92vw)] bg-deck border-l border-rule-strong shadow-2xl transition-transform duration-300 ease-out overflow-y-auto overscroll-contain ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"

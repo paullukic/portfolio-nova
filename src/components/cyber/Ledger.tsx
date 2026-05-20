@@ -10,10 +10,27 @@ type Entry = {
   link?: string;
   highlights: string[];
   stack: string[];
-  tone: "cyan" | "mag" | "acid" | "amber";
+  tone: "cyan" | "mag" | "acid" | "amber" | "blood";
 };
 
 const ENTRIES: Entry[] = [
+  {
+    year: "2026",
+    span: "2026 — PRESENT",
+    org: "COOGRAPH",
+    role: "OSS · GRAPH-FIRST AI CODING WORKFLOW",
+    location: "SOLO · OSS",
+    link: "https://coograph.com",
+    tone: "blood",
+    highlights: [
+      "Authored Coograph — an open-source workflow that ships native AI-coding config for 8 tools (Claude Code, Copilot, Codex CLI, OpenCode, Cursor, Windsurf, Aider, Cline) from one install.",
+      "Built a standalone Python MCP server that parses any codebase into a SQLite dependency graph via tree-sitter — agents query `get_minimal_context()` instead of grepping 200+ files, cutting context per task from ~50K to ~2K tokens.",
+      "Designed five specialized agents (Planner, Reviewer, Debugger, Verifier, Explore) with hard anti-hallucination constraints: verbatim citations from fresh reads, graph-first lookups, 3-retry circuit breakers.",
+      "Shipped Claude Code lifecycle hooks (block edits to generated files, two-tier bash audit log, scope-creep warnings, session-start graph reports) and the OpenSpec proposal flow (Plan → Propose → Apply → QA → Review → Archive).",
+      "Built an interactive D3 force-directed visualizer of the code graph, a project-sync layer that propagates template updates on `git pull`, and a public roadmap. MIT-licensed.",
+    ],
+    stack: ["PYTHON", "SQLITE", "TREE_SITTER", "MCP", "CLAUDE_CODE", "OPENSPEC", "D3", "GIT_HOOKS"],
+  },
   {
     year: "2025",
     span: "DEC_2025 — PRESENT",
@@ -222,6 +239,8 @@ function Row({
       ? { txt: "text-mag", glow: "glow-mag", bar: "bg-mag", border: "border-mag/50" }
       : entry.tone === "acid"
       ? { txt: "text-acid", glow: "glow-acid", bar: "bg-acid", border: "border-acid/50" }
+      : entry.tone === "blood"
+      ? { txt: "text-blood", glow: "glow-blood", bar: "bg-blood", border: "border-blood/50" }
       : { txt: "text-amber", glow: "", bar: "bg-amber", border: "border-amber/50" };
 
   return (
