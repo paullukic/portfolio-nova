@@ -424,7 +424,7 @@ function Plate({ project, onOpen }: { project: Project; onOpen: () => void }) {
       ? "min-h-[500px] lg:min-h-[600px]"
       : project.span === "wide"
       ? "min-h-[320px]"
-      : "min-h-[360px]";
+      : "min-h-[400px]";
 
   const isFeature = project.span === "feature" || project.span === "tall";
 
