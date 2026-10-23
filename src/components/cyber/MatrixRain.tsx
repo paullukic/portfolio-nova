@@ -58,7 +58,7 @@ export function MatrixRain() {
     const draw = () => {
       ctx.fillStyle = "rgba(5, 5, 7, 0.08)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = `${fontSize}px JetBrains Mono, monospace`;
+      ctx.font = `${fontSize}px "JetBrains Mono Variable", monospace`;
       for (let i = 0; i < drops.length; i++) {
         const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
         const x = i * fontSize;

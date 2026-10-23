@@ -319,7 +319,7 @@ export function DiagramShield() {
         y="85"
         textAnchor="middle"
         fill="currentColor"
-        fontFamily="JetBrains Mono, monospace"
+        fontFamily="JetBrains Mono Variable, monospace"
         fontSize="12"
         letterSpacing="2"
       >
@@ -392,7 +392,7 @@ function DiagramShop() {
         y={130}
         fill="currentColor"
         fillOpacity={0.6}
-        fontFamily="JetBrains Mono, monospace"
+        fontFamily="JetBrains Mono Variable, monospace"
         fontSize={7}
         letterSpacing={1.4}
       >

@@ -16,6 +16,9 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 1200,
+    // Never base64 fonts into the render-blocking CSS: unicode-range means most
+    // subsets are never downloaded, but inlined ones are always paid for.
+    assetsInlineLimit: (file) => (file.endsWith('.woff2') ? false : undefined),
     // No manualChunks. Splitting React apart from react-dom / react-router /
     // @react-three/fiber causes init-order errors (React namespace is undefined
     // when vendor libs reach for forwardRef / useLayoutEffect / Children at

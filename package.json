@@ -18,6 +18,9 @@
     "qa": "node scripts/qa.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource/chakra-petch": "^5.3.0",
+    "@fontsource/zen-dots": "^5.3.0",
     "@react-three/drei": "^10.1.2",
     "@react-three/fiber": "^9.1.2",
     "@react-three/postprocessing": "^3.0.4",

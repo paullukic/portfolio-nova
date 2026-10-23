@@ -17,7 +17,7 @@
   --color-blood: #ff3b3b;
 
   --font-display: "Chakra Petch", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
   --font-zen: "Zen Dots", "Chakra Petch", monospace;
 }
 
