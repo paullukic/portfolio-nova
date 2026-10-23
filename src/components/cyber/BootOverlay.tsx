@@ -10,10 +10,20 @@ const LINES = [
   { t: "> handshake complete. welcome, operator.", c: "text-acid", d: 340 },
 ];
 
+const SEEN_KEY = "pl-boot-seen";
+
 export function BootOverlay() {
   const [shown, setShown] = useState<typeof LINES>([]);
   const [fading, setFading] = useState(false);
-  const [gone, setGone] = useState(false);
+  // Shown at most once per browser session, never under reduced motion.
+  const [gone, setGone] = useState(() => {
+    try {
+      if (sessionStorage.getItem(SEEN_KEY)) return true;
+    } catch {
+      /* storage blocked: show it */
+    }
+    return matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
 
   // Lock body scroll while the boot screen is up so the page can't drift
   // even if fonts swap or lazy chunks arrive. Also pins scrollY to 0 on
@@ -36,10 +46,11 @@ export function BootOverlay() {
   }, [gone]);
 
   useEffect(() => {
-    // honour reduced-motion: skip the boot sequence entirely
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setGone(true);
-      return;
+    if (gone) return;
+    try {
+      sessionStorage.setItem(SEEN_KEY, "1");
+    } catch {
+      /* ignore */
     }
     let acc = 300;
     const timers: number[] = [];

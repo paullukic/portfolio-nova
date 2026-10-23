@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import {
-  motion,
+  m as motion,
   useScroll,
   useSpring,
   useTransform,
   useVelocity,
+  useReducedMotion,
 } from "motion/react";
 
 type Side = "left" | "right";
@@ -33,12 +34,13 @@ export function SectionWatermark({
   const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
   const skewX = useTransform(vSmooth, [-3000, 0, 3000], ["-4deg", "0deg", "4deg"]);
   const letterSpacing = useTransform(vSmooth, [-3000, 0, 3000], ["-0.04em", "0em", "0.06em"]);
+  const reduce = useReducedMotion();
 
   return (
     <div ref={ref} className="pointer-events-none absolute inset-0 z-0">
       <motion.div
         aria-hidden
-        style={{ y, skewX, letterSpacing }}
+        style={reduce ? undefined : { y, skewX, letterSpacing }}
         className={`pointer-events-none absolute -top-6 ${
           side === "left" ? "left-4 md:left-10" : "right-4 md:right-10"
         } font-zen text-[28vw] md:text-[22vw] lg:text-[18vw] leading-none text-rule-strong/60 select-none will-change-transform`}

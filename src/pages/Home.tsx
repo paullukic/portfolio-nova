@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BootOverlay } from "@/components/cyber/BootOverlay";
 import { RevealObserver } from "@/components/cyber/RevealObserver";
 import { HudBar } from "@/components/cyber/HudBar";
@@ -17,13 +17,17 @@ import { Clearance } from "@/components/cyber/Clearance";
 import { Changelog } from "@/components/cyber/Changelog";
 import { Footer } from "@/components/cyber/Footer";
 import { Divider } from "@/components/cyber/Divider";
-import { MatrixRain } from "@/components/cyber/MatrixRain";
-import { AmbientAudio } from "@/components/cyber/AmbientAudio";
-import { CommandPalette } from "@/components/cyber/CommandPalette";
-import { CyberCursor } from "@/components/cyber/CyberCursor";
 import { SmoothScroll } from "@/components/cyber/SmoothScroll";
-import { ThemeSwitcher } from "@/components/cyber/ThemeSwitcher";
 import { AccentMorph } from "@/components/cyber/AccentMorph";
+
+// Optional extras: none of these matter for first paint, so each ships in its own chunk.
+const lazyNamed = <K extends string>(load: () => Promise<Record<K, React.ComponentType>>, name: K) =>
+  lazy(() => load().then((mod) => ({ default: mod[name] })));
+const CommandPalette = lazyNamed(() => import("@/components/cyber/CommandPalette"), "CommandPalette");
+const AmbientAudio = lazyNamed(() => import("@/components/cyber/AmbientAudio"), "AmbientAudio");
+const CyberCursor = lazyNamed(() => import("@/components/cyber/CyberCursor"), "CyberCursor");
+const MatrixRain = lazyNamed(() => import("@/components/cyber/MatrixRain"), "MatrixRain");
+const ThemeSwitcher = lazyNamed(() => import("@/components/cyber/ThemeSwitcher"), "ThemeSwitcher");
 
 export default function Home() {
   // Neutralise the "page scrolled a few px on load" drift that happens when
@@ -69,11 +73,13 @@ export default function Home() {
       </a>
       <SmoothScroll />
       <AccentMorph />
-      <CyberCursor />
+      <Suspense fallback={null}>
+        <CyberCursor />
+        <MatrixRain />
+        <AmbientAudio />
+      </Suspense>
       <BootOverlay />
       <RevealObserver />
-      <MatrixRain />
-      <AmbientAudio />
       <Nav />
       <Hero />
       <Marquee />
@@ -94,8 +100,10 @@ export default function Home() {
       <Footer />
       <MissionRail />
       <HudBar />
-      <CommandPalette />
-      <ThemeSwitcher />
+      <Suspense fallback={null}>
+        <CommandPalette />
+        <ThemeSwitcher />
+      </Suspense>
     </main>
   );
 }

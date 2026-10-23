@@ -7,6 +7,7 @@ const SECTIONS: { id: string; accent: string }[] = [
   { id: "ledger", accent: "var(--color-mag)" },
   { id: "now", accent: "var(--color-acid)" },
   { id: "toolkit", accent: "var(--color-acid)" },
+  { id: "clearance", accent: "var(--color-blood)" },
   { id: "lab", accent: "var(--color-mag)" },
   { id: "contact", accent: "var(--color-mag)" },
 ];

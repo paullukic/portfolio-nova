@@ -27,6 +27,7 @@ export function MatrixRain() {
       buffer.current.push(e.key);
       buffer.current = buffer.current.slice(-KONAMI.length);
       if (KONAMI.every((k, i) => buffer.current[i] === k)) {
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         setActive(true);
         buffer.current = [];
         setTimeout(() => setActive(false), 8000);

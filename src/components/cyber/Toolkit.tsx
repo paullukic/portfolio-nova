@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m as motion } from "motion/react";
 import { DecodeOnView } from "./GlitchText";
 import { SectionWatermark } from "./SectionWatermark";
 import { skills, type SkillCategory } from "@/content/skills";

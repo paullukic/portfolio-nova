@@ -8,6 +8,7 @@ export function CyberCursor() {
 
   useEffect(() => {
     if (matchMedia("(hover: none)").matches) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let rx = 0,
       ry = 0,

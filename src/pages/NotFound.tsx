@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { ArrowLeft, Home, Terminal } from "lucide-react";
 import { GlitchText } from "@/components/cyber/GlitchText";
 import { social } from "@/content/profile";
 
 export default function NotFound() {
-  const loc = useLocation();
+  const loc = window.location;
   const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
@@ -59,14 +58,14 @@ export default function NotFound() {
 
         {/* actions */}
         <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Link
-            to="/"
+          <a
+            href="/"
             className="clip-cta inline-flex items-center gap-2 px-5 py-2.5 bg-cyan text-void font-mono text-[11px] uppercase tracking-[0.24em] font-bold hover:bg-acid transition-colors"
           >
             <Home className="h-3.5 w-3.5" />
             RETURN_HOME
             <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
-          </Link>
+          </a>
           <button
             type="button"
             onClick={() => history.back()}

@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { ArrowUpRight, FileSearch } from "lucide-react";
 import { DecodeOnView } from "./GlitchText";
 import { SectionWatermark } from "./SectionWatermark";
 import { HoloCard } from "./HoloCard";
 import { DiagramFor } from "./ProjectDiagrams";
-import { CaseDrawer } from "./CaseDrawer";
+
 import { projects } from "@/content/projects";
 import type { Project } from "@/content/types";
+
+const CaseDrawer = lazy(() => import("./CaseDrawer").then((mod) => ({ default: mod.CaseDrawer })));
 
 type Plated = Project & { no: string };
 
@@ -43,6 +45,8 @@ const toneBorder = {
 
 export function Selected() {
   const [openProject, setOpenProject] = useState<Plated | null>(null);
+  // the drawer chunk loads on first open and stays mounted for exit animations
+  const [drawerWanted, setDrawerWanted] = useState(false);
 
   const shippingCount = PROJECTS.filter((p) => ["SHIPPING", "LIVE", "ONGOING", "BUILDING"].includes(p.status)).length;
 
@@ -100,13 +104,23 @@ export function Selected() {
                   : "col-span-12 md:col-span-6 lg:col-span-4"
               }
             >
-              <Plate project={p} onOpen={() => setOpenProject(p)} />
+              <Plate
+                project={p}
+                onOpen={() => {
+                  setDrawerWanted(true);
+                  setOpenProject(p);
+                }}
+              />
             </div>
           ))}
         </div>
       </div>
 
-      <CaseDrawer project={openProject} onClose={() => setOpenProject(null)} />
+      {drawerWanted && (
+        <Suspense fallback={null}>
+          <CaseDrawer project={openProject} onClose={() => setOpenProject(null)} />
+        </Suspense>
+      )}
     </section>
   );
 }

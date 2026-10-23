@@ -1,5 +1,5 @@
 import { Hammer, BookOpen, Headphones, Mail, ArrowRight, Code2 } from "lucide-react";
-import { motion } from "motion/react";
+import { m as motion } from "motion/react";
 import { DecodeOnView } from "./GlitchText";
 import { SectionWatermark } from "./SectionWatermark";
 import { now } from "@/content/now";

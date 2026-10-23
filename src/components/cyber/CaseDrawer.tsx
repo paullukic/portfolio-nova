@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { X, ArrowUpRight, Target, Wrench, CheckCircle2, AlertTriangle } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { m as motion, AnimatePresence } from "motion/react";
 import { social } from "@/content/profile";
 
 export type CaseStudy = {

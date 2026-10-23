@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { ArrowDownRight, Wifi, Cpu, Shield, Zap } from "lucide-react";
-import { motion, useScroll, useSpring, useTransform, useVelocity } from "motion/react";
+import { m as motion, useReducedMotion, useScroll, useSpring, useTransform, useVelocity } from "motion/react";
 import { GlitchText, DecodeText, DecodeOnView } from "./GlitchText";
 import { MobileHeroBg } from "./MobileHeroBg";
 import { HeroParallax } from "./HeroParallax";
@@ -180,11 +180,12 @@ function ScrollReactiveH1() {
   const vSmooth = useSpring(v, { damping: 30, stiffness: 180, mass: 0.5 });
   const letterSpacing = useTransform(vSmooth, [-2500, 0, 2500], ["-0.08em", "-0.03em", "0.06em"]);
   const skewX = useTransform(vSmooth, [-2500, 0, 2500], ["-2deg", "0deg", "2deg"]);
+  const reduce = useReducedMotion();
 
   return (
     <motion.div
       aria-hidden
-      style={{ letterSpacing, skewX }}
+      style={reduce ? undefined : { letterSpacing, skewX }}
       className="font-display mt-4 leading-[0.86] tracking-tighter text-bone uppercase will-change-transform"
     >
       <span className="block text-[15vw] sm:text-[13vw] md:text-[10vw] lg:text-[8.5rem] font-light">
