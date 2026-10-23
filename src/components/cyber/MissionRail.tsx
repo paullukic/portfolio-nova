@@ -3,6 +3,8 @@ import { sections } from "@/content/sections";
 
 const SECTIONS = sections;
 
+// Below 1700px the viewport has no gutter beside the 1480px content column,
+// so the rail shrinks to dots (labels on hover) instead of printing over text.
 export function MissionRail() {
   const [active, setActive] = useState("top");
   const [progress, setProgress] = useState(0);
@@ -28,15 +30,15 @@ export function MissionRail() {
 
   return (
     <aside
-      className="hidden lg:flex fixed left-4 top-1/2 -translate-y-1/2 z-30 flex-col items-start gap-0 select-none pointer-events-none"
+      className="hidden lg:flex fixed left-1.5 min-[1700px]:left-4 top-1/2 -translate-y-1/2 z-30 flex-col items-start gap-0 select-none pointer-events-none"
       aria-hidden="true"
     >
       {/* label strip */}
-      <div className="mb-3 font-mono text-[9px] uppercase tracking-[0.32em] text-fade">
+      <div className="hidden min-[1700px]:block mb-3 font-mono text-[10px] uppercase tracking-[0.32em] text-fade">
         <span className="text-cyan">▣</span> MISSION · {String(Math.round(progress * 100)).padStart(2, "0")}%
       </div>
 
-      <ol className="relative pointer-events-auto">
+      <ol className="relative">
         {/* vertical line + fill */}
         <span className="absolute left-[5px] top-1 bottom-1 w-px bg-rule-strong" />
         <span
@@ -58,7 +60,7 @@ export function MissionRail() {
               >
                 {/* dot */}
                 <span
-                  className={`absolute left-0 top-1/2 -translate-y-1/2 h-[11px] w-[11px] border transition-all ${
+                  className={`pointer-events-auto absolute left-0 top-1/2 -translate-y-1/2 h-[11px] w-[11px] border transition-all ${
                     isActive
                       ? "border-acid bg-acid glow-acid"
                       : "border-rule-strong bg-void group-hover:border-cyan"
@@ -70,9 +72,9 @@ export function MissionRail() {
                 />
                 {/* label */}
                 <span
-                  className={`font-mono text-[10px] uppercase tracking-[0.24em] transition-all ${
+                  className={`pointer-events-none font-mono text-[10px] uppercase tracking-[0.24em] transition-all ${
                     isActive
-                      ? "text-acid glow-acid opacity-100 translate-x-0"
+                      ? "text-acid glow-acid opacity-0 min-[1700px]:opacity-100 group-hover:opacity-100 translate-x-0"
                       : "text-fade opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-bone"
                   }`}
                 >
@@ -84,7 +86,7 @@ export function MissionRail() {
         })}
       </ol>
 
-      <div className="mt-3 font-mono text-[9px] uppercase tracking-[0.32em] text-fade">
+      <div className="hidden min-[1700px]:block mt-3 font-mono text-[10px] uppercase tracking-[0.32em] text-fade">
         <span className="text-mag">◆</span> NODE {String(
           Math.max(0, SECTIONS.findIndex((s) => s.id === active))
         ).padStart(2, "0")}/{String(SECTIONS.length - 1).padStart(2, "0")}

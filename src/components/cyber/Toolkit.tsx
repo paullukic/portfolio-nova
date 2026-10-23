@@ -150,7 +150,7 @@ function CategoryCard({
         {headline}
       </h3>
 
-      <ul className="mt-6 space-y-1.5">
+      <ul className="mt-6 grid grid-cols-2 gap-x-5 md:grid-cols-1">
         {cat.items.map((it, i) => (
           <motion.li
             key={it}
@@ -161,7 +161,7 @@ function CategoryCard({
             className="group/item flex items-center gap-3 border-b border-rule py-1.5 last:border-0"
           >
             <span className={`inline-block h-1 w-1 shrink-0 ${bgCls} opacity-70 group-hover/item:opacity-100`} />
-            <span className="font-display uppercase text-base md:text-lg tracking-tight leading-tight text-bone group-hover/item:text-cyan transition-colors">
+            <span className="min-w-0 break-words font-display uppercase text-[15px] md:text-lg tracking-tight leading-tight text-bone group-hover/item:text-cyan transition-colors">
               {it}
             </span>
           </motion.li>

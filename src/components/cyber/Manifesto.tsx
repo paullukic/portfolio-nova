@@ -170,7 +170,7 @@ export function Manifesto() {
 
         <div className="grid grid-cols-12 gap-8" data-reveal style={{ ["--reveal-delay" as any]: "120ms" }}>
           {/* terminal */}
-          <div className="col-span-12 lg:col-span-5 relative border border-rule-strong bg-deck/80 backdrop-blur-sm">
+          <div className="col-span-12 lg:col-span-5 lg:self-start lg:sticky lg:top-24 relative border border-rule-strong bg-deck/80 backdrop-blur-sm">
             <span className="corner-bracket tl" />
             <span className="corner-bracket tr" />
             <span className="corner-bracket bl" />

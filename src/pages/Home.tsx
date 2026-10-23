@@ -40,14 +40,14 @@ export default function Home() {
     let userMoved = false;
     const onWheel = () => { userMoved = true; };
     const onTouch = () => { userMoved = true; };
-    const onKey = (e: KeyboardEvent) => {
-      if (["PageDown", "PageUp", "ArrowDown", "ArrowUp", " "].includes(e.key)) {
-        userMoved = true;
-      }
-    };
+    // any key (scroll keys, section shortcuts, palette) or pointer press
+    // (nav links) counts as intent, so the pin never undoes a navigation
+    const onKey = () => { userMoved = true; };
+    const onPointer = () => { userMoved = true; };
     window.addEventListener("wheel", onWheel, { passive: true });
     window.addEventListener("touchstart", onTouch, { passive: true });
     window.addEventListener("keydown", onKey);
+    window.addEventListener("pointerdown", onPointer);
     window.scrollTo(0, 0);
     const t1 = setTimeout(() => !userMoved && window.scrollTo(0, 0), 200);
     const t2 = setTimeout(() => !userMoved && window.scrollTo(0, 0), 700);
@@ -56,6 +56,7 @@ export default function Home() {
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouch);
       window.removeEventListener("keydown", onKey);
+      window.removeEventListener("pointerdown", onPointer);
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);

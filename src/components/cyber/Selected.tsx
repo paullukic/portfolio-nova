@@ -128,12 +128,12 @@ export function Selected() {
 function Plate({ project, onOpen }: { project: Plated; onOpen: () => void }) {
   const minH =
     project.span === "feature"
-      ? "min-h-[500px] lg:min-h-[600px]"
+      ? "min-h-[440px] lg:min-h-[600px]"
       : project.span === "tall"
       ? "min-h-[500px] lg:min-h-[600px]"
       : project.span === "wide"
       ? "min-h-[320px]"
-      : "min-h-[400px]";
+      : "min-h-[340px] md:min-h-[400px]";
 
   const isFeature = project.span === "feature" || project.span === "tall";
 
@@ -185,15 +185,25 @@ function Plate({ project, onOpen }: { project: Plated; onOpen: () => void }) {
                 <svg width="10" height="10" viewBox="0 0 10 10" className="shrink-0" style={{ color: hex }}>
                   <polygon points="5,0 10,5 5,10 0,5" fill="currentColor" />
                 </svg>
-                <span
-                  className="font-mono text-[10px] uppercase tracking-[0.22em] num-tab"
-                  style={{ color: hex }}
-                >
-                  ID/{id}
-                </span>
+                {/* the decorative ID only fits on the wide feature plate; on
+                    standard plates it pushed the real client/date strip into
+                    an ellipsis */}
+                {project.span === "feature" && (
+                  <span
+                    className="font-mono text-[10px] uppercase tracking-[0.22em] num-tab"
+                    style={{ color: hex }}
+                  >
+                    ID/{id}
+                  </span>
+                )}
               </div>
-              <span className="hidden sm:inline-block w-px h-3 bg-rule-strong shrink-0" />
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-fade truncate">
+              {project.span === "feature" && (
+                <span className="hidden sm:inline-block w-px h-3 bg-rule-strong shrink-0" />
+              )}
+              <span
+                className="font-mono text-[10px] uppercase tracking-[0.22em] text-ash truncate"
+                title={project.client}
+              >
                 {project.client}
               </span>
             </div>
@@ -212,8 +222,13 @@ function Plate({ project, onOpen }: { project: Plated; onOpen: () => void }) {
             </div>
           </div>
 
-          {/* DIAGRAM CANVAS */}
-          <div className="relative flex-1 overflow-hidden">
+          {/* DIAGRAM CANVAS: a floor sized to the metric stack, so the
+              metrics never clip when the footer grows (mobile tag wrap) */}
+          <div
+            className={`relative flex-1 overflow-hidden ${
+              (project.metrics?.length ?? 0) >= 3 ? "min-h-[220px]" : "min-h-[160px]"
+            }`}
+          >
             {/* technical grid */}
             <div
               className="pointer-events-none absolute inset-0 opacity-20"
@@ -234,12 +249,12 @@ function Plate({ project, onOpen }: { project: Plated; onOpen: () => void }) {
             </div>
 
             {/* corner readouts */}
-            <div className="absolute top-3 right-4 flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.22em] text-fade">
+            <div className="absolute top-3 right-4 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-fade">
               <span>CH.{(project.no.charCodeAt(0) % 9) + 1}</span>
               <span style={{ color: hex }}>•</span>
               <span>{(parseInt(project.no, 10) * 23) % 99}.{(parseInt(project.no, 10) * 7) % 9}MHZ</span>
             </div>
-            <div className="absolute bottom-3 left-5 font-mono text-[9px] uppercase tracking-[0.22em] text-fade">
+            <div className="absolute bottom-3 left-5 font-mono text-[10px] uppercase tracking-[0.22em] text-fade">
               SCAN_OK <span className="text-acid">●</span>
             </div>
 
@@ -264,7 +279,7 @@ function Plate({ project, onOpen }: { project: Plated; onOpen: () => void }) {
                     >
                       {m.k}
                     </div>
-                    <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.22em] text-ash whitespace-nowrap">
+                    <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.22em] text-ash whitespace-nowrap">
                       {m.v}
                     </div>
                   </li>
@@ -307,14 +322,14 @@ function Plate({ project, onOpen }: { project: Plated; onOpen: () => void }) {
 
           {/* FOOTER STRIP */}
           <div
-            className="relative z-10 px-5 md:px-6 py-3 border-t flex items-center justify-between gap-3"
+            className="relative z-10 px-5 md:px-6 py-3 border-t flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between"
             style={{ borderColor: alpha(20) }}
           >
             <ul className="flex flex-wrap gap-1.5 min-w-0">
               {project.tags.slice(0, isFeature ? 5 : 3).map((t) => (
                 <li
                   key={t}
-                  className="clip-tag px-2.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.18em] text-bone"
+                  className="clip-tag px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-bone"
                   style={{
                     background: alpha(10),
                     color: hex,
@@ -324,7 +339,7 @@ function Plate({ project, onOpen }: { project: Plated; onOpen: () => void }) {
                 </li>
               ))}
               {project.tags.length > (isFeature ? 5 : 3) && (
-                <li className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-fade py-0.5">
+                <li className="font-mono text-[10px] uppercase tracking-[0.18em] text-fade py-0.5">
                   +{project.tags.length - (isFeature ? 5 : 3)}
                 </li>
               )}

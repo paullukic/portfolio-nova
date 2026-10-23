@@ -56,9 +56,10 @@ export function Hero() {
 
       {/* content */}
       <HeroParallax />
-      <div className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-12 gap-x-6 px-4 md:px-7 pt-24 pb-28 sm:pt-28 md:pt-36 lg:pt-44 md:pb-24">
+      <div className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-12 gap-x-6 px-4 md:px-7 pt-24 pb-28 sm:pt-28 md:pt-36 lg:pt-44 md:pb-24 lg:pb-40">
         {/* left meta */}
-        <aside className="col-span-12 lg:col-span-3 space-y-7 reveal">
+        {/* below lg the name leads and the meta fields follow it */}
+        <aside className="order-2 lg:order-none col-span-12 lg:col-span-3 mt-12 lg:mt-0 grid grid-cols-2 gap-x-6 gap-y-7 lg:block lg:space-y-7 reveal">
           <Field label="DESIGNATION">{profile.designation}</Field>
           <Field label="HOME_NODE">{profile.homeNode}</Field>
           <Field label="STACK">{profile.stackLine}</Field>
@@ -70,7 +71,7 @@ export function Hero() {
         </aside>
 
         {/* center: NAME */}
-        <div className="col-span-12 lg:col-span-9 reveal" style={{ animationDelay: "120ms" }}>
+        <div className="order-1 lg:order-none col-span-12 lg:col-span-9 reveal" style={{ animationDelay: "120ms" }}>
           <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-cyan glow-cyan">
             <span className="text-fade">{">>"}</span> SUBJECT_PROFILE.LOAD —{" "}
             <DecodeText text={profile.fileId} /> <span className="blink" />
@@ -248,7 +249,7 @@ function StatNum({ stat, delay }: { stat: Stat; delay: number }) {
   return (
     <div
       ref={ref}
-      className="font-zen text-3xl md:text-4xl text-cyan glow-cyan num-tab leading-none"
+      className="font-zen text-3xl md:text-4xl lg:text-[clamp(1.5rem,2.2vw,2.25rem)] text-cyan glow-cyan num-tab leading-none whitespace-nowrap"
     >
       {stat.prefix}
       {body}
