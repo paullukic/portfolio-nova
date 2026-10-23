@@ -12,7 +12,7 @@ export function Clearance() {
   return (
     <section
       id="clearance"
-      className="relative py-28 md:py-40 border-t border-blood/40 overflow-hidden bg-void"
+      className="brackets-blood relative py-28 md:py-40 border-t border-blood/40 overflow-hidden bg-void"
     >
       <div className="pointer-events-none absolute inset-0">
         <Suspense fallback={null}>
@@ -76,7 +76,7 @@ export function Clearance() {
               </a>
             ))}
 
-            <div data-reveal className="relative border border-rule-strong bg-void/80 backdrop-blur-sm p-5 md:p-6">
+            <div data-reveal className="relative border border-blood/30 bg-void/80 backdrop-blur-sm p-5 md:p-6">
               <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-blood">
                 // OFFENSIVE_TOOLKIT
               </div>
@@ -136,7 +136,7 @@ export function Clearance() {
                 OPEN_NOTEBOOK
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
-              <span className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-fade">
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-fade">
                 pen-test · red team · disclosure
               </span>
             </div>
