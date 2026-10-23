@@ -13,6 +13,7 @@ import { Ledger } from "@/components/cyber/Ledger";
 import { Now } from "@/components/cyber/Now";
 import { Toolkit } from "@/components/cyber/Toolkit";
 import { Lab } from "@/components/cyber/Lab";
+import { Clearance } from "@/components/cyber/Clearance";
 import { Changelog } from "@/components/cyber/Changelog";
 import { Footer } from "@/components/cyber/Footer";
 import { Divider } from "@/components/cyber/Divider";
@@ -86,6 +87,7 @@ export default function Home() {
       <Now />
       <Divider label="◇◆◇◆  INVENTORY  ◇◆◇◆" tone="acid" />
       <Toolkit />
+      <Clearance />
       <Divider label="//  AFTER_HOURS  //" tone="amber" />
       <Lab />
       <Changelog />
