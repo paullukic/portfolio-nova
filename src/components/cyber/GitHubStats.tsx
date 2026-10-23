@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Github, GitBranch, Users, Star } from "lucide-react";
 import { social } from "@/content/profile";
 
@@ -51,9 +51,34 @@ export function GitHubStats() {
   const [stats, setStats] = useState<Stats | null>(cached);
   const [degraded, setDegraded] = useState<boolean>(!cached && typeof window !== "undefined" && recentError());
 
+  // Only call the GitHub API once the card is near the viewport: keeps two
+  // third-party requests off every page load and spares the shared 60 req/h
+  // unauthenticated quota for visitors who actually reach THE_LAB.
+  const ref = useRef<HTMLAnchorElement>(null);
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    if (stats || near) return;
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setNear(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "600px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [stats, near]);
+
   useEffect(() => {
     // Warm from cache; skip network if cached or if we recently got rate-limited.
-    if (stats) return;
+    if (stats || !near) return;
     if (recentError()) {
       setStats(FALLBACK);
       setDegraded(true);
@@ -91,10 +116,11 @@ export function GitHubStats() {
     return () => {
       cancelled = true;
     };
-  }, [stats]);
+  }, [stats, near]);
 
   return (
     <a
+      ref={ref}
       href={`https://github.com/${USER}`}
       target="_blank"
       rel="noreferrer"
@@ -148,12 +174,13 @@ export function GitHubStats() {
 
 function Cell({ icon, k, v }: { icon: React.ReactNode; k: string | number; v: string }) {
   return (
-    <div className="bg-deck px-3 py-3">
-      <div className="flex items-center gap-1.5">
+    // dt before dd as <dl> requires; flex-col-reverse keeps the number on top
+    <div className="bg-deck px-3 py-3 flex flex-col-reverse">
+      <dt className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-fade">{v}</dt>
+      <dd className="flex items-center gap-1.5">
         {icon}
         <span className="font-zen text-lg md:text-xl text-bone num-tab leading-none">{k}</span>
-      </div>
-      <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-fade">{v}</div>
+      </dd>
     </div>
   );
 }

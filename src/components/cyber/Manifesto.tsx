@@ -399,9 +399,9 @@ function Capability({
       <div className={`font-mono text-[10px] uppercase tracking-[0.22em] ${text}`}>
         {label}
       </div>
-      <h4 className="mt-2 font-display uppercase text-lg md:text-xl text-bone leading-tight tracking-tight">
+      <h3 className="mt-2 font-display uppercase text-lg md:text-xl text-bone leading-tight tracking-tight">
         {title}
-      </h4>
+      </h3>
       <ul className="mt-3 space-y-2">
         {bullets.map((b, i) => (
           <li key={i} className="flex gap-2.5 text-[13px] leading-relaxed text-ash text-pretty">
