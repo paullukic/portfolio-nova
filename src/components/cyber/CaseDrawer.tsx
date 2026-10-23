@@ -69,7 +69,8 @@ export function CaseDrawer({
       window.removeEventListener("keydown", onKey);
       document.documentElement.style.overflow = "";
       // restore focus to the element that opened the drawer
-      returnFocusRef.current?.focus?.();
+      // preventScroll: restoring focus must not undo the scroll a command just started
+      returnFocusRef.current?.focus?.({ preventScroll: true });
     };
   }, [open, onClose]);
 
@@ -83,7 +84,7 @@ export function CaseDrawer({
         {open && (
           <motion.div
             key="scrim"
-            className="fixed inset-0 z-[60] bg-void/70 backdrop-blur-sm"
+            className="fixed inset-0 z-[150] bg-void/70 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -99,7 +100,7 @@ export function CaseDrawer({
         {open && (
           <motion.div
             key="flash"
-            className="fixed right-0 top-0 bottom-0 z-[72] w-full sm:w-[min(720px,92vw)] pointer-events-none"
+            className="fixed right-0 top-0 bottom-0 z-[162] w-full sm:w-[min(720px,92vw)] pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: [0, 1, 0] }}
             exit={{ opacity: 0 }}
@@ -121,7 +122,7 @@ export function CaseDrawer({
         }}
         key={project?.no ?? "closed"}
         data-lenis-prevent
-        className={`fixed right-0 top-0 bottom-0 z-[70] w-full sm:w-[min(720px,92vw)] bg-deck border-l border-rule-strong shadow-2xl transition-transform duration-300 ease-out overflow-y-auto overscroll-contain ${
+        className={`fixed right-0 top-0 bottom-0 z-[160] w-full sm:w-[min(720px,92vw)] bg-deck border-l border-rule-strong shadow-2xl transition-transform duration-300 ease-out overflow-y-auto overscroll-contain ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
@@ -189,7 +190,11 @@ export function CaseDrawer({
 
               {/* metrics strip */}
               {project.metrics && project.metrics.length > 0 && (
-                <ul className="grid grid-cols-3 gap-px bg-rule-strong border border-rule-strong">
+                <ul
+                  className={`grid gap-px bg-rule-strong border border-rule-strong ${
+                    project.metrics.length === 1 ? "grid-cols-1" : project.metrics.length === 2 ? "grid-cols-2" : "grid-cols-3"
+                  }`}
+                >
                   {project.metrics.map((m) => (
                     <li key={m.k} className="bg-deck px-3 py-4 text-center">
                       <div

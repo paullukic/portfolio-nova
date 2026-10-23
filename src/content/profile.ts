@@ -93,7 +93,13 @@ export const profile = {
 } as const;
 
 export const social = {
-  github: { href: "https://github.com/paullukic", value: "@paullukic", user: "paullukic" },
+  github: {
+    href: "https://github.com/paullukic",
+    value: "@paullukic",
+    user: "paullukic",
+    /** Shown when the GitHub API is rate-limited (snapshot 2026-10-23). */
+    fallback: { repos: 28, followers: 9 },
+  },
   linkedin: { href: "https://www.linkedin.com/in/paul-lukic/", value: "/in/paul-lukic" },
   email: { href: `mailto:${profile.email}`, value: profile.email },
 };

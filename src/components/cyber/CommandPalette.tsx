@@ -177,7 +177,8 @@ export function CommandPalette() {
   useEffect(() => {
     if (!open) {
       // palette just closed — restore focus to whatever triggered it
-      returnFocusRef.current?.focus?.();
+      // preventScroll: restoring focus must not undo the scroll a command just started
+      returnFocusRef.current?.focus?.({ preventScroll: true });
       return;
     }
     returnFocusRef.current = document.activeElement as HTMLElement | null;
@@ -211,7 +212,7 @@ export function CommandPalette() {
   const helpMode = q.trim() === "?";
 
   return (
-    <div className="fixed inset-0 z-[90] flex items-start justify-center pt-[10vh] px-4">
+    <div className="fixed inset-0 z-[140] flex items-start justify-center pt-[10vh] px-4">
       <div
         className="absolute inset-0 bg-void/75 backdrop-blur-sm"
         onClick={() => setOpen(false)}

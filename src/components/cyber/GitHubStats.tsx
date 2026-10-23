@@ -17,10 +17,7 @@ const ERR_KEY = "gh-stats-err-at";
 
 // Static floor — displayed when both the network AND the cache have nothing.
 // Keeps the section from looking broken on rate-limit / offline.
-const FALLBACK: Stats = {
-  repos: 25,
-  followers: 3,
-};
+const FALLBACK: Stats = social.github.fallback;
 
 function readCache(): Stats | null {
   try {

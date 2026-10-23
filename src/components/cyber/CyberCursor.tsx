@@ -5,10 +5,19 @@ export function CyberCursor() {
   const ring = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(false);
   const [down, setDown] = useState(false);
+  // hidden until the first mousemove so it never sits at 0,0 on load
+  const [seen, setSeen] = useState(false);
+  // Only mouse-driven, motion-OK devices get the custom cursor. Elsewhere it
+  // renders nothing (it used to leave a frozen ring in the top-left corner).
+  const [enabled] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      matchMedia("(hover: hover) and (pointer: fine)").matches &&
+      !matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   useEffect(() => {
-    if (matchMedia("(hover: none)").matches) return;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!enabled) return;
 
     let rx = 0,
       ry = 0,
@@ -24,6 +33,7 @@ export function CyberCursor() {
         dot.current.style.transform = `translate3d(${tx - 3}px, ${ty - 3}px, 0)`;
       }
 
+      setSeen(true);
       const tgt = e.target as HTMLElement | null;
       const interactive = tgt?.closest("a, button, [data-cursor='hover']");
       setHover(!!interactive);
@@ -64,13 +74,15 @@ export function CyberCursor() {
       window.removeEventListener("mouseup", onUp);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <>
       <div
         ref={dot}
-        className="pointer-events-none fixed left-0 top-0 z-[200] h-1.5 w-1.5 rounded-full bg-cyan mix-blend-screen"
+        className={`pointer-events-none fixed left-0 top-0 z-[200] h-1.5 w-1.5 rounded-full bg-cyan mix-blend-screen ${seen ? "" : "opacity-0"}`}
         style={{
           boxShadow: "0 0 8px rgba(0,240,255,0.9), 0 0 18px rgba(0,240,255,0.6)",
         }}
@@ -79,7 +91,7 @@ export function CyberCursor() {
         ref={ring}
         className={`pointer-events-none fixed left-0 top-0 z-[200] grid h-9 w-9 place-items-center transition-[opacity,width,height,background] duration-200 ${
           hover ? "h-12 w-12" : ""
-        }`}
+        } ${seen ? "" : "opacity-0"}`}
         style={{
           mixBlendMode: "screen",
         }}

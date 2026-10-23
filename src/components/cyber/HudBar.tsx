@@ -90,14 +90,15 @@ export function HudBar() {
               <Cpu className="h-3 w-3 text-cyan" />
               CORE 37.0°C
             </span>
-            <span className="hidden md:inline w-px h-3 bg-rule-strong shrink-0" />
-            <span className="hidden md:flex items-center gap-2 text-bone shrink-0">
+            {/* SIGNAL + ICE are decoration; they give way to the full tracker at xl */}
+            <span className="hidden md:inline xl:hidden w-px h-3 bg-rule-strong shrink-0" />
+            <span className="hidden md:flex xl:hidden items-center gap-2 text-bone shrink-0">
               <Wifi className="h-3 w-3 text-cyan" />
               SIGNAL <SignalBars value={signal} />
               <span className="text-cyan num-tab">{signal}%</span>
             </span>
-            <span className="hidden lg:inline w-px h-3 bg-rule-strong shrink-0" />
-            <span className="hidden lg:flex items-center gap-1.5 text-mag shrink-0">
+            <span className="hidden lg:inline xl:hidden w-px h-3 bg-rule-strong shrink-0" />
+            <span className="hidden lg:flex xl:hidden items-center gap-1.5 text-mag shrink-0">
               <Lock className="h-3 w-3" />
               ICE PERM
             </span>
@@ -138,7 +139,7 @@ export function HudBar() {
                     }`}
                   />
                   <span className="text-[9.5px]">
-                    {String(i).padStart(2, "0")} {s.label}
+                    {String(i).padStart(2, "0")} {s.navLabel ?? s.label}
                   </span>
                 </a>
               );
