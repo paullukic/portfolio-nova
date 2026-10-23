@@ -14,7 +14,8 @@
     "check": "npm run typecheck && npm run lint",
     "check:site": "node scripts/check-site.mjs",
     "og": "node scripts/og.mjs",
-    "shoot": "node scripts/shoot.mjs"
+    "shoot": "node scripts/shoot.mjs",
+    "qa": "node scripts/qa.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.1.2",
