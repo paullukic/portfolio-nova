@@ -14,13 +14,13 @@ export function Clearance() {
       id="clearance"
       className="relative py-28 md:py-40 border-t border-blood/40 overflow-hidden bg-void"
     >
-      <div className="pointer-events-none absolute inset-0 opacity-70">
+      <div className="pointer-events-none absolute inset-0">
         <Suspense fallback={null}>
           <BlackwallField className="absolute inset-0" />
         </Suspense>
       </div>
       {/* keep text readable over the wall */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,7,0.92)_0%,rgba(5,5,7,0.75)_55%,rgba(5,5,7,0.45)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,7,0.88)_0%,rgba(5,5,7,0.55)_50%,rgba(5,5,7,0.15)_100%)]" />
       <SectionWatermark number="06" side="left" />
 
       <div className="relative mx-auto max-w-[1480px] px-4 md:px-7 z-10">

@@ -79,7 +79,7 @@ function Small({ relic }: { relic: Relic }) {
         <Icon className="h-3.5 w-3.5" />
         {relic.label}
       </div>
-      <h3 className="font-display uppercase text-base md:text-lg text-bone leading-tight tracking-tight break-all">
+      <h3 className="font-mono text-[13px] text-bone leading-snug tracking-tight [overflow-wrap:anywhere]">
         {relic.title}
       </h3>
       <p className="text-ash text-[12.5px] text-pretty flex-1">{relic.note}</p>

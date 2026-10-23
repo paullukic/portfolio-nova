@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 const TEMPLATE = new URL("./og-template.html", import.meta.url).href;
 const OUT = resolve(fileURLToPath(new URL("../public/og.png", import.meta.url)));
 
-const browser = await chromium.launch();
+const browser = await chromium.launch({ channel: process.env.PW_CHANNEL });
 const ctx = await browser.newContext({
   viewport: { width: 1200, height: 630 },
   deviceScaleFactor: 2,

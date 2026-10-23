@@ -1,12 +1,12 @@
 import { chromium } from "playwright";
 import { mkdir } from "node:fs/promises";
 
-const URL = process.env.URL || "http://localhost:5174/";
+const URL = process.env.URL || "http://localhost:4173/";
 const OUT = "./.shots";
 
 await mkdir(OUT, { recursive: true });
 
-const browser = await chromium.launch();
+const browser = await chromium.launch({ channel: process.env.PW_CHANNEL });
 
 const viewports = [
   { name: "desktop", width: 1440, height: 900 },
@@ -49,7 +49,7 @@ for (const vp of viewports) {
       await new Promise((r) => setTimeout(r, 400));
     });
 
-    const sections = ["brief", "selected", "ledger", "toolkit", "lab", "contact"];
+    const sections = ["brief", "selected", "ledger", "now", "toolkit", "clearance", "lab", "contact"];
     for (const id of sections) {
       try {
         const el = await page.$(`#${id}`);
