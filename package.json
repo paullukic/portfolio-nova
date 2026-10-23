@@ -1,5 +1,5 @@
 {
-  "name": "portfolio",
+  "name": "portfolio-nova",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,42 +9,35 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "og": "node scripts/og.mjs",
-    "shoot": "node scripts/shoot.mjs"
+    "shoot": "node scripts/shoot.mjs",
+    "typecheck": "tsc --noEmit -p .",
+    "check": "npm run typecheck && npm run lint"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.2.3",
-    "@radix-ui/react-tooltip": "^1.2.7",
     "@react-three/drei": "^10.1.2",
     "@react-three/fiber": "^9.1.2",
     "@react-three/postprocessing": "^3.0.4",
     "@tailwindcss/vite": "^4.1.8",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
     "lenis": "^1.3.23",
     "lucide-react": "^0.513.0",
     "motion": "^12.38.0",
     "postprocessing": "^6.39.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^6.30.1",
-    "tailwind-merge": "^3.3.0"
+    "react-router-dom": "^6.30.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
-    "@tailwindcss/postcss": "^4.1.8",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
-    "autoprefixer": "^10.4.21",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
     "playwright": "^1.59.1",
-    "postcss": "^8.5.4",
     "tailwindcss": "^4.1.8",
-    "tw-animate-css": "^1.3.4",
-    "vite": "^6.3.5",
-    "vite-tsconfig-paths": "^5.1.4"
+    "typescript": "^5.9.3",
+    "vite": "^6.3.5"
   }
 }

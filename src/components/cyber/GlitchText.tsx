@@ -1,3 +1,4 @@
+import type React from "react";
 import { useEffect, useRef, useState } from "react";
 
 const GLITCH_CHARS = "!@#$%^&*()_+-=[]{}|;:,.<>?ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ01";
@@ -106,7 +107,7 @@ export function DecodeOnView({
   durationMs?: number;
   rootMargin?: string;
   threshold?: number;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 }) {
   const reduce =
     typeof window !== "undefined" &&
@@ -180,7 +181,7 @@ export function HoverDecode({
   className?: string;
   durationMs?: number;
   preserveWhitespace?: boolean;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 }) {
   const [out, setOut] = useState(text);
   const rafRef = useRef(0);

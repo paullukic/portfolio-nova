@@ -35,7 +35,7 @@ export default function Home() {
     let userMoved = false;
     const onWheel = () => { userMoved = true; };
     const onTouch = () => { userMoved = true; };
-    const onKey = (e) => {
+    const onKey = (e: KeyboardEvent) => {
       if (["PageDown", "PageUp", "ArrowDown", "ArrowUp", " "].includes(e.key)) {
         userMoved = true;
       }

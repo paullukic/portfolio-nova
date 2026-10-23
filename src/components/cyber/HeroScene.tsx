@@ -241,6 +241,5 @@ function GridFloor() {
       ref.current.position.z = (ref.current.position.z + dt * 0.8) % 2;
     }
   });
-  // @ts-expect-error gridHelper JSX
   return <gridHelper ref={ref} args={[120, 120, "#00f0ff", "#ff1f8e"]} position={[0, -3.4, 0]} />;
 }
