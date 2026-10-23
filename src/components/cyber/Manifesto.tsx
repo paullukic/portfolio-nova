@@ -220,7 +220,7 @@ function Terminal() {
   const [history, setHistory] = useState<string[]>([]);
   const [hIdx, setHIdx] = useState(-1);
   const [booted, setBooted] = useState(false);
-  const endRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // boot sequence once
@@ -237,9 +237,11 @@ function Terminal() {
     return () => clearInterval(id);
   }, []);
 
-  // autoscroll
+  // autoscroll the terminal box only; scrollIntoView would also drag the
+  // whole page down to the terminal while the boot lines print
   useEffect(() => {
-    endRef.current?.scrollIntoView({ block: "end" });
+    const box = boxRef.current;
+    if (box) box.scrollTop = box.scrollHeight;
   }, [lines]);
 
   const run = (raw: string) => {
@@ -307,8 +309,9 @@ function Terminal() {
 
   return (
     <div
+      ref={boxRef}
       className="m-0 px-4 py-5 font-mono text-[12px] leading-relaxed text-bone min-h-[320px] max-h-[460px] overflow-y-auto"
-      onClick={() => inputRef.current?.focus()}
+      onClick={() => inputRef.current?.focus({ preventScroll: true })}
     >
       {lines.map((l, i) => (
         <div key={i}>
@@ -352,7 +355,6 @@ function Terminal() {
           <span className="blink text-cyan" aria-hidden="true">▌</span>
         </div>
       )}
-      <div ref={endRef} />
     </div>
   );
 }
