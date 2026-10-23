@@ -3,7 +3,8 @@ import type { Tone } from "./types";
 // RELICS: earlier portfolios, kept online as archives and linked from THE_LAB.
 // v1 = react-projects (react.paullukic.com), v2 = cyberpunk-v2, v3 = the
 // cyberpunk site this one was forked from. The terminal site leaves the apex
-// domain when this site takes it over, so it needs a new home.
+// domain when this site takes it over and moves to terminal.paullukic.com
+// (confirmed by Paul, 2026-10-23; it stays in Firebase project portfolio-fa807).
 
 export type Relic = {
   id: string;
@@ -15,7 +16,7 @@ export type Relic = {
   icon: "terminal" | "monitor";
 };
 
-/** New home of the 2022 terminal site (and its /gui/win98 page) once paullukic.com points here. */
+/** Home of the 2022 terminal site (and its /gui/win98 page) once paullukic.com points here. */
 export const TERMINAL_ARCHIVE = "https://terminal.paullukic.com";
 
 export const relics: Relic[] = [
@@ -23,7 +24,6 @@ export const relics: Relic[] = [
     id: "terminal",
     label: "TERMINAL · 2022",
     title: "terminal.paullukic.com",
-    // TODO(paul): host the old terminal site here (or change the URL) before the apex cutover.
     note: "The original terminal site that lived on paullukic.com.",
     link: TERMINAL_ARCHIVE,
     tone: "cyan",

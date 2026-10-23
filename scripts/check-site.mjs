@@ -110,8 +110,9 @@ if (args.has("--links")) {
         else fail(msg);
       } catch (e) {
         const msg = `${url} -> ${e.cause?.code ?? e.name}`;
-        // the terminal archive is expected to be offline until it is re-hosted
-        if (terminal.includes(url)) warn(`${msg} (terminal archive not hosted yet)`);
+        // terminal.paullukic.com resolves only once its custom domain is added in
+        // Firebase (project portfolio-fa807); see the README cutover checklist
+        if (terminal.includes(url)) warn(`${msg} (terminal.paullukic.com DNS not set up yet: README cutover step 1)`);
         else fail(msg);
       }
     }),

@@ -47,10 +47,10 @@ Hosting target `main` maps to the site `paullukic-com` in the existing Firebase 
 
 Cutover checklist (Hermes / Paul):
 
-1. Host the old terminal site at `terminal.paullukic.com` (or change `TERMINAL_ARCHIVE` in `src/content/archive.ts` and the `/gui/*` redirect in `firebase.json`), then delete the `TODO(paul)` in `archive.ts`.
+1. Move the old terminal site to `terminal.paullukic.com`. It already lives in Firebase project `portfolio-fa807` (default site `portfolio-fa807.web.app`); no redeploy is needed. In the Firebase console, open Hosting for `portfolio-fa807` and choose "Add custom domain" → `terminal.paullukic.com`. At the DNS provider for paullukic.com, add the records Firebase shows: usually an `A` record for host `terminal` → `199.36.158.100`, plus the `TXT` record if it asks for ownership verification. Wait for the SSL certificate to show "Connected", then check that `https://terminal.paullukic.com/gui/win98.html` loads.
 2. Create the hosting site: `firebase hosting:sites:create paullukic-com --project cyberpunk-portfolio-paxhax`.
 3. `npm run build:release`, then deploy: `firebase deploy --only hosting:main --project cyberpunk-portfolio-paxhax`.
-4. In the Firebase console, remove `paullukic.com` from the project that serves the terminal site today. Then add `paullukic.com` (apex) to site `paullukic-com`, and add `www.paullukic.com` as a redirect to the apex.
+4. In the Firebase console, remove `paullukic.com` (and `www.paullukic.com` if listed) from Hosting in `portfolio-fa807`, leaving `terminal.paullukic.com` attached there. Then add `paullukic.com` (apex) to site `paullukic-com`, and add `www.paullukic.com` as a redirect to the apex.
 5. Add `paullukic.com` as a site in Plausible (the script now reports to that domain).
 6. Optional: re-enable push-triggered deploys in `.github/workflows/`.
 
