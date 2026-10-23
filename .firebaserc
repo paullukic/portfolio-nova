@@ -1,5 +1,12 @@
 {
   "projects": {
     "default": "cyberpunk-portfolio-paxhax"
+  },
+  "targets": {
+    "cyberpunk-portfolio-paxhax": {
+      "hosting": {
+        "main": ["paullukic-com"]
+      }
+    }
   }
 }

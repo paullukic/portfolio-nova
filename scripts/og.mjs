@@ -1,13 +1,11 @@
-// Generate public/og.png from public/og-template.html using Playwright.
-// Run after `npm run build` (so /og-template.html is served) or against dev.
-//   usage: URL=http://localhost:5174 node scripts/og.mjs
-//   default: URL=http://localhost:4173 (vite preview)
+// Generate public/og.png from scripts/og-template.html using Playwright.
+//   usage: node scripts/og.mjs
 
 import { chromium } from "playwright";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const BASE = process.env.URL || "http://localhost:4173";
+const TEMPLATE = new URL("./og-template.html", import.meta.url).href;
 const OUT = resolve(fileURLToPath(new URL("../public/og.png", import.meta.url)));
 
 const browser = await chromium.launch();
@@ -16,7 +14,7 @@ const ctx = await browser.newContext({
   deviceScaleFactor: 2,
 });
 const page = await ctx.newPage();
-await page.goto(`${BASE}/og-template.html`, { waitUntil: "networkidle" });
+await page.goto(TEMPLATE, { waitUntil: "networkidle" });
 // wait a beat for fonts
 await page.waitForTimeout(800);
 await page.screenshot({
