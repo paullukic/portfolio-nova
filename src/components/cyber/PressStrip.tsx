@@ -1,16 +1,11 @@
 import { HoverDecode } from "./GlitchText";
+import { projects } from "@/content/projects";
+import { experience } from "@/content/experience";
 
 const NODES = [
-  { label: "COOGRAPH", sub: "OSS · 2026—NOW", tone: "blood" },
-  { label: "INVT", sub: "CYBERGRID · 2025—NOW", tone: "cyan" },
-  { label: "CLUING", sub: "EX-COLABWRITING · 23—25", tone: "mag" },
-  { label: "GASTARBAJTER24", sub: "SOLO · 2024—NOW", tone: "acid" },
-  { label: "IGELPHONE", sub: "SOLO · 2024—NOW", tone: "cyan" },
-  { label: "TEODESK", sub: "ENTERPRISE · 20—23", tone: "amber" },
-  { label: "4BEES", sub: "GAME · 2023", tone: "mag" },
-  { label: "COR_TECH", sub: "US · 2020", tone: "cyan" },
-  { label: "CHROME_STORE", sub: "ACQUIRED · 2021", tone: "acid" },
-] as const;
+  ...projects.flatMap((p) => (p.press ? [{ ...p.press, tone: p.tone }] : [])),
+  ...experience.flatMap((e) => (e.press ? [{ ...e.press, tone: e.tone }] : [])),
+];
 
 export function PressStrip() {
   return (
@@ -25,11 +20,11 @@ export function PressStrip() {
           <span className="text-ash">TRANSMITTED_FROM</span>
           <span className="inline-block h-px w-6 bg-cyan" />
           <span className="ml-auto hidden md:inline text-fade">
-            ▦ 9 NODES · OSS + CLIENT + SOLO
+            ▦ {NODES.length} NODES · OSS + CLIENT + SOLO
           </span>
         </div>
 
-        <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-px bg-rule-strong border border-rule-strong">
+        <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-rule-strong border border-rule-strong">
           {NODES.map((n, i) => (
             <li
               key={n.label}

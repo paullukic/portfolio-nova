@@ -1,6 +1,7 @@
 import { ArrowUpRight, Github, Linkedin, Mail, FileText, Check, Clock, MapPin } from "lucide-react";
 import { GlitchText, DecodeOnView } from "./GlitchText";
 import { SectionWatermark } from "./SectionWatermark";
+import { profile, social } from "@/content/profile";
 
 export function Footer() {
   return (
@@ -9,7 +10,7 @@ export function Footer() {
       className="relative grain border-t border-rule-strong pt-24 pb-10 md:pt-32 overflow-hidden"
     >
       <div className="pointer-events-none absolute inset-0 grid-floor opacity-30" />
-      <SectionWatermark number="07" side="right" />
+      <SectionWatermark number="08" side="right" />
 
       <div className="relative mx-auto max-w-[1480px] px-4 md:px-7 z-10">
         {/* NOW-style kinetic hero */}
@@ -48,13 +49,14 @@ export function Footer() {
             <div className="mt-3 flex items-baseline gap-3">
               <span className="inline-block h-2.5 w-2.5 rounded-full bg-acid pulse-soft" />
               <p className="font-display uppercase text-2xl md:text-3xl text-bone leading-tight tracking-tight">
-                Open to senior roles + select contracts
+                Open to new roles + select contracts
               </p>
             </div>
             <p className="mt-4 text-ash text-[14px] leading-relaxed text-pretty">
-              Currently engineering Cybergrid backend at INVT. Quietly listening
-              for the next strong fit — whether that's a senior IC seat, a
-              founding-engineer role at an early-stage company, or a deep
+              Currently engineering the {profile.currently.product} backend at{" "}
+              {profile.currently.org}, and building my own products after hours.
+              Quietly listening for the next strong fit: a full-stack or backend
+              seat, a founding-engineer role at an early-stage company, or a deep
               contract on something interesting.
             </p>
           </div>
@@ -63,13 +65,7 @@ export function Footer() {
             <li className="font-mono text-[10px] uppercase tracking-[0.22em] text-cyan">
               // ACCEPTING
             </li>
-            {[
-              "Senior full-stack (Java + JS/TS)",
-              "Senior backend (Spring · Modulith · distributed)",
-              "Founding engineer · early stage",
-              "Deep contracts · 3 → 12 months",
-              "Cybersecurity · pen-test (PenTest+)",
-            ].map((r) => (
+            {profile.openTo.map(({ label: r }) => (
               <li
                 key={r}
                 className="flex items-center gap-3 font-display uppercase text-base text-bone tracking-tight"
@@ -87,7 +83,7 @@ export function Footer() {
               </div>
               <p className="mt-1 flex items-center gap-2 font-display uppercase text-base text-bone tracking-tight">
                 <MapPin className="h-3.5 w-3.5 text-mag" />
-                Novi Sad · CET / CEST
+                Novi Sad · {profile.timezone}
               </p>
             </li>
             <li>
@@ -95,7 +91,7 @@ export function Footer() {
                 // WORK MODE
               </div>
               <p className="mt-1 font-display uppercase text-base text-bone tracking-tight">
-                Remote-first · EU-hybrid OK
+                {profile.workMode}
               </p>
             </li>
             <li>
@@ -104,7 +100,7 @@ export function Footer() {
               </div>
               <p className="mt-1 flex items-center gap-2 font-display uppercase text-base text-bone tracking-tight">
                 <Clock className="h-3.5 w-3.5 text-mag" />
-                ≤ 24 hours
+                {profile.response}
               </p>
             </li>
           </ul>
@@ -116,11 +112,12 @@ export function Footer() {
               {">>"} DIRECT_LINE
             </div>
             <a
-              href="mailto:paul.lukic94@gmail.com"
+              href={social.email.href}
               className="mt-6 block font-display uppercase text-[7vw] md:text-[5vw] lg:text-[4.4rem] leading-[0.92] tracking-tight text-bone hover:text-cyan transition-colors text-balance break-all"
             >
-              <GlitchText text="paul.lukic94" intensity={0.4} />
-              <span className="italic text-mag glow-mag">@</span>gmail.com
+              <GlitchText text={profile.email.split("@")[0]} intensity={0.4} />
+              <span className="italic text-mag glow-mag">@</span>
+              {profile.email.split("@")[1]}
             </a>
 
             <p className="mt-8 max-w-xl font-display text-xl md:text-2xl text-ash leading-snug text-pretty">
@@ -135,28 +132,30 @@ export function Footer() {
             <Link
               icon={<Mail className="h-3.5 w-3.5" />}
               label="EMAIL"
-              href="mailto:paul.lukic94@gmail.com"
-              value="paul.lukic94@gmail.com"
+              href={social.email.href}
+              value={social.email.value}
             />
             <Link
               icon={<Linkedin className="h-3.5 w-3.5" />}
               label="LINKEDIN"
-              href="https://www.linkedin.com/in/paul-lukic/"
-              value="/in/paul-lukic"
+              href={social.linkedin.href}
+              value={social.linkedin.value}
             />
             <Link
               icon={<Github className="h-3.5 w-3.5" />}
               label="GITHUB"
-              href="https://github.com/paullukic"
-              value="@paullukic"
+              href={social.github.href}
+              value={social.github.value}
             />
-            <Link
-              icon={<FileText className="h-3.5 w-3.5" />}
-              label="CV"
-              href="/Paul_Lukic_CV.pdf"
-              value="Paul_Lukic_CV.pdf"
-              download
-            />
+            {profile.cv && (
+              <Link
+                icon={<FileText className="h-3.5 w-3.5" />}
+                label="CV"
+                href={profile.cv}
+                value={profile.cv.replace(/^\//, "")}
+                download
+              />
+            )}
           </div>
         </div>
 

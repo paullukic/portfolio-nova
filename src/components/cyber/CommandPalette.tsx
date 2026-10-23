@@ -1,8 +1,34 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Search, ArrowRight, FileText, Mail, Github, Linkedin,
-  Compass, Cpu, Zap, Activity, FolderOpen, Terminal, HelpCircle,
+  Compass, Cpu, Zap, Activity, FolderOpen, Terminal, HelpCircle, Shield,
 } from "lucide-react";
+import { sections } from "@/content/sections";
+import { profile, social } from "@/content/profile";
+
+const SECTION_TITLES: Record<string, string> = {
+  top: "Hero",
+  brief: "Brief",
+  selected: "Selected Work",
+  ledger: "Ledger",
+  now: "NOW (live feed)",
+  toolkit: "Toolkit",
+  clearance: "Clearance (security)",
+  lab: "The Lab",
+  contact: "Contact",
+};
+
+const SECTION_ICONS: Record<string, React.ReactNode> = {
+  top: <Compass className="h-3.5 w-3.5" />,
+  brief: <Cpu className="h-3.5 w-3.5" />,
+  selected: <FolderOpen className="h-3.5 w-3.5" />,
+  ledger: <FileText className="h-3.5 w-3.5" />,
+  now: <Activity className="h-3.5 w-3.5" />,
+  toolkit: <Zap className="h-3.5 w-3.5" />,
+  clearance: <Shield className="h-3.5 w-3.5" />,
+  lab: <Terminal className="h-3.5 w-3.5" />,
+  contact: <Mail className="h-3.5 w-3.5" />,
+};
 
 type Cmd = {
   id: string;
@@ -28,45 +54,49 @@ export function CommandPalette() {
       setOpen(false);
     };
     return [
-      { id: "go-top", group: "nav", label: "Go to Hero", kbd: "1", icon: <Compass className="h-3.5 w-3.5" />, run: go("top") },
-      { id: "go-brief", group: "nav", label: "Go to Brief", kbd: "2", icon: <Cpu className="h-3.5 w-3.5" />, run: go("brief") },
-      { id: "go-selected", group: "nav", label: "Go to Selected Work", kbd: "3", icon: <FolderOpen className="h-3.5 w-3.5" />, run: go("selected") },
-      { id: "go-ledger", group: "nav", label: "Go to Ledger", kbd: "4", icon: <FileText className="h-3.5 w-3.5" />, run: go("ledger") },
-      { id: "go-now", group: "nav", label: "Go to NOW (live feed)", kbd: "5", icon: <Activity className="h-3.5 w-3.5" />, run: go("now") },
-      { id: "go-toolkit", group: "nav", label: "Go to Toolkit", kbd: "6", icon: <Zap className="h-3.5 w-3.5" />, run: go("toolkit") },
-      { id: "go-lab", group: "nav", label: "Go to The Lab", kbd: "7", icon: <Terminal className="h-3.5 w-3.5" />, run: go("lab") },
-      { id: "go-contact", group: "nav", label: "Go to Contact", kbd: "8", icon: <Mail className="h-3.5 w-3.5" />, run: go("contact") },
+      ...sections.map((sec, i): Cmd => ({
+        id: `go-${sec.id}`,
+        group: "nav",
+        label: `Go to ${SECTION_TITLES[sec.id] ?? sec.label}`,
+        kbd: String(i + 1),
+        icon: SECTION_ICONS[sec.id] ?? <Compass className="h-3.5 w-3.5" />,
+        run: go(sec.id),
+      })),
 
       {
         id: "mail",
         group: "action",
         label: "Email Paul",
-        hint: "paul.lukic94@gmail.com",
+        hint: profile.email,
         icon: <Mail className="h-3.5 w-3.5" />,
         run: () => {
-          window.location.href = "mailto:paul.lukic94@gmail.com";
+          window.location.href = social.email.href;
           setOpen(false);
         },
       },
-      {
-        id: "cv",
-        group: "action",
-        label: "Download CV",
-        hint: "Paul_Lukic_CV.pdf",
-        icon: <FileText className="h-3.5 w-3.5" />,
-        run: () => {
-          window.open("/Paul_Lukic_CV.pdf", "_blank");
-          setOpen(false);
-        },
-      },
+      ...(profile.cv
+        ? [
+            {
+              id: "cv",
+              group: "action",
+              label: "Download CV",
+              hint: profile.cv.replace(/^\//, ""),
+              icon: <FileText className="h-3.5 w-3.5" />,
+              run: () => {
+                window.open(profile.cv!, "_blank");
+                setOpen(false);
+              },
+            } satisfies Cmd,
+          ]
+        : []),
       {
         id: "github",
         group: "action",
         label: "Open GitHub",
-        hint: "github.com/paullukic",
+        hint: social.github.href.replace("https://", ""),
         icon: <Github className="h-3.5 w-3.5" />,
         run: () => {
-          window.open("https://github.com/paullukic", "_blank");
+          window.open(social.github.href, "_blank");
           setOpen(false);
         },
       },
@@ -74,10 +104,10 @@ export function CommandPalette() {
         id: "linkedin",
         group: "action",
         label: "Open LinkedIn",
-        hint: "linkedin.com/in/paul-lukic",
+        hint: social.linkedin.href.replace("https://www.", "").replace(/\/$/, ""),
         icon: <Linkedin className="h-3.5 w-3.5" />,
         run: () => {
-          window.open("https://www.linkedin.com/in/paul-lukic/", "_blank");
+          window.open(social.linkedin.href, "_blank");
           setOpen(false);
         },
       },
@@ -129,11 +159,9 @@ export function CommandPalette() {
         setQ("?");
         return;
       }
-      // number shortcuts 1-8
-      if (/^[1-8]$/.test(e.key)) {
-        const targetId = [
-          "top", "brief", "selected", "ledger", "now", "toolkit", "lab", "contact",
-        ][parseInt(e.key, 10) - 1];
+      // number shortcuts 1..N, one per section
+      if (/^[1-9]$/.test(e.key) && parseInt(e.key, 10) <= sections.length) {
+        const targetId = sections[parseInt(e.key, 10) - 1].id;
         const el = document.getElementById(targetId);
         if (el) {
           e.preventDefault();
@@ -237,7 +265,7 @@ export function CommandPalette() {
             <Shortcut keys={["/"]} label="Open command palette" />
             <Shortcut keys={["⌘", "K"]} altKeys={["Ctrl", "K"]} label="Open command palette" />
             <Shortcut keys={["?"]} label="Show this help" />
-            <Shortcut keys={["1", "-", "8"]} label="Jump to section 1–8" />
+            <Shortcut keys={["1", "-", String(sections.length)]} label={`Jump to section 1–${sections.length}`} />
             <Shortcut keys={["Esc"]} label="Close overlays" />
             <p className="pt-2 text-fade normal-case tracking-normal font-sans">
               Pro tip: most overlays (case-study drawer, this palette, mobile menu) close with <span className="text-cyan">ESC</span>.

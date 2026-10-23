@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowLeft, Home, Terminal } from "lucide-react";
 import { GlitchText } from "@/components/cyber/GlitchText";
+import { social } from "@/content/profile";
 
 export default function NotFound() {
   const loc = useLocation();
@@ -75,7 +76,7 @@ export default function NotFound() {
             PREV_NODE
           </button>
           <a
-            href="mailto:paul.lukic94@gmail.com"
+            href={social.email.href}
             className="ml-auto inline-flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.24em] text-mag hover:text-bone"
           >
             <Terminal className="h-3.5 w-3.5" />

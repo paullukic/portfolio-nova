@@ -2,35 +2,20 @@ import { Hammer, BookOpen, Headphones, Mail, ArrowRight, Code2 } from "lucide-re
 import { motion } from "motion/react";
 import { DecodeOnView } from "./GlitchText";
 import { SectionWatermark } from "./SectionWatermark";
+import { now } from "@/content/now";
+import { profile, social } from "@/content/profile";
 
 type Tone = "cyan" | "mag" | "acid" | "amber";
 
-const SHIPPING = [
-  { k: "INVT / Cybergrid", v: "MQTT · observability", active: true },
-  { k: "Igelphone.de", v: "store + admin panel", active: true },
-  { k: "Gastarbajter24", v: "new vertical · growth", active: true },
-  { k: "Coograph", v: "OSS · graph-first AI workflow", active: true },
-  { k: "Portfolio v3", v: "this dossier — live", active: true },
-];
-
-const LEARNING = [
-  { k: "OSCP prep", tone: "cyan" as Tone },
-  { k: "CRDTs", tone: "acid" as Tone },
-  { k: "WebGPU shaders", tone: "mag" as Tone },
-];
-
-const READING = [
-  { k: "Designing Data-Intensive Apps", author: "Kleppmann", status: "Re-read" },
-  { k: "The Web App Hacker's Handbook", author: "Stuttard", status: "In progress" },
-  { k: "Atomic Habits", author: "Clear", status: "Finished" },
-];
-
-const ROLES = ["senior full-stack", "senior backend", "founding engineer", "deep contract", "pen-test"];
+const SHIPPING = now.shipping;
+const LEARNING = now.learning;
+const READING = now.reading;
+const ROLES = profile.openTo.map((r) => r.label);
 
 export function Now() {
-  const now = new Date();
-  const stamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-  const weekNum = Math.ceil(((now.getTime() - new Date(now.getFullYear(), 0, 1).getTime()) / 86400000 + new Date(now.getFullYear(), 0, 1).getDay() + 1) / 7);
+  const date = new Date();
+  const stamp = now.asOf;
+  const weekNum = Math.ceil(((date.getTime() - new Date(date.getFullYear(), 0, 1).getTime()) / 86400000 + new Date(date.getFullYear(), 0, 1).getDay() + 1) / 7);
 
   return (
     <section
@@ -207,7 +192,7 @@ export function Now() {
 
           {/* AVAILABILITY — CTA card (amber) */}
           <a
-            href="mailto:paul.lukic94@gmail.com"
+            href={social.email.href}
             data-reveal
             className="col-span-12 lg:col-span-7 relative border border-amber/30 bg-deck/70 p-6 md:p-8 group hover:border-amber/70 transition-all flex flex-col justify-between min-h-[240px] overflow-hidden"
           >
@@ -254,7 +239,7 @@ export function Now() {
                   Reply in <span className="text-amber">24h</span>.
                 </div>
                 <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.22em] text-fade">
-                  paul.lukic94@gmail.com
+                  {profile.email}
                 </div>
               </div>
               <span className="clip-cta shrink-0 inline-flex items-center gap-2 px-5 py-3 bg-amber text-void font-mono text-[11px] uppercase tracking-[0.24em] font-bold group-hover:translate-x-1 transition-transform">
@@ -275,16 +260,14 @@ export function Now() {
             </div>
             <span className="shrink-0 h-4 w-px bg-rule-strong" />
             <p className="font-display text-base md:text-lg text-bone leading-snug italic">
-              <span className="text-mag glow-mag">✶</span> Wiring up better GitHub telemetry on Cybergrid, shipping a
-              dev diary into{" "}
-              <span className="text-cyan">this dossier</span>, and stress-testing a pentest write-up pipeline.
+              <span className="text-mag glow-mag">✶</span> {now.today}
             </p>
           </aside>
         </div>
 
         <p className="mt-8 font-mono text-[10.5px] uppercase tracking-[0.22em] text-fade">
           <span className="text-acid glow-acid">●</span> LIVE · hand-kept · outdated entries
-          are a bug — <a className="underline underline-offset-2 hover:text-cyan" href="mailto:paul.lukic94@gmail.com">ping me if you spot one</a>.
+          are a bug — <a className="underline underline-offset-2 hover:text-cyan" href={social.email.href}>ping me if you spot one</a>.
         </p>
       </div>
     </section>

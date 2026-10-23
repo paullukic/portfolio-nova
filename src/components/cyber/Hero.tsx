@@ -5,6 +5,7 @@ import { GlitchText, DecodeText, DecodeOnView } from "./GlitchText";
 import { MobileHeroBg } from "./MobileHeroBg";
 import { HeroParallax } from "./HeroParallax";
 import { Magnetic } from "./Magnetic";
+import { profile } from "@/content/profile";
 
 const HeroScene = lazy(() => import("./HeroScene"));
 
@@ -16,12 +17,15 @@ type Stat = {
   label: string;
 };
 
-const STATS: Stat[] = [
-  { n: 6, suffix: "+", pad: 2, label: "YEARS\nSHIPPING" },
-  { n: 200, prefix: "+", suffix: "%", label: "ORGANIC\nLIFT (SOLO)" },
-  { n: 2, suffix: "K+", label: "USERS\n(ACQUIRED)" },
-  { n: 150, label: "MAU\nZERO CAC" },
-];
+const STATS: readonly Stat[] = profile.stats;
+
+const TONE_TEXT = {
+  cyan: "text-cyan",
+  mag: "text-mag",
+  acid: "text-acid",
+  amber: "text-amber",
+  blood: "text-blood",
+} as const;
 
 export function Hero() {
   const heavy = useHeavy();
@@ -55,9 +59,9 @@ export function Hero() {
       <div className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-12 gap-x-6 px-4 md:px-7 pt-24 pb-28 sm:pt-28 md:pt-36 lg:pt-44 md:pb-24">
         {/* left meta */}
         <aside className="col-span-12 lg:col-span-3 space-y-7 reveal">
-          <Field label="DESIGNATION">SENIOR FULL-STACK DEV</Field>
-          <Field label="HOME_NODE">NOVI_SAD · RS · CET</Field>
-          <Field label="STACK">JAVA · SPRING · REACT · SVELTE · FIREBASE</Field>
+          <Field label="DESIGNATION">{profile.designation}</Field>
+          <Field label="HOME_NODE">{profile.homeNode}</Field>
+          <Field label="STACK">{profile.stackLine}</Field>
           <Field label="STATUS">
             <span className="text-acid glow-acid">
               / OPEN_TO_ROLES · REPLY ≤ 24H
@@ -69,11 +73,11 @@ export function Hero() {
         <div className="col-span-12 lg:col-span-9 reveal" style={{ animationDelay: "120ms" }}>
           <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-cyan glow-cyan">
             <span className="text-fade">{">>"}</span> SUBJECT_PROFILE.LOAD —{" "}
-            <DecodeText text="PL-94-001" /> <span className="blink" />
+            <DecodeText text={profile.fileId} /> <span className="blink" />
           </p>
 
           <ScrollReactiveH1 />
-          <h1 className="sr-only">Paul Lukić</h1>
+          <h1 className="sr-only">{profile.name}, {profile.title}</h1>
 
           {/* spec sheet */}
           <div className="mt-10 grid grid-cols-12 gap-5">
@@ -90,20 +94,25 @@ export function Hero() {
                 <span className="text-fade">042/042 BYTES</span>
               </div>
               <p className="mt-4 font-display text-lg md:text-xl leading-snug text-bone text-pretty">
-                Senior full-stack developer. Six years shipping{" "}
+                {profile.title}. Shipping{" "}
                 <span className="text-cyan glow-cyan">Java/Spring</span> backends and{" "}
-                <span className="text-mag glow-mag">React/Svelte</span> frontends —
-                from grid-scale energy infra at{" "}
-                <span className="text-acid glow-acid">INVT/Cybergrid</span> to a
-                solo-built marketplace at 150 MAU. Founded a product, sold a
-                Chrome extension, mentor by default, ship by deadline.
+                <span className="text-mag glow-mag">React/Svelte</span> frontends since {profile.since}:
+                grid-scale energy infra at{" "}
+                <span className="text-acid glow-acid">
+                  {profile.currently.org}/{profile.currently.product}
+                </span>{" "}
+                by day, my own products after hours:{" "}
+                {profile.afterHours.slice(0, -1).join(", ")} and {profile.afterHours.at(-1)}.
+                Sold a Chrome extension, mentor by default, ship by deadline.
               </p>
               <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ash">
-                Open to: <span className="text-cyan">senior full-stack</span> ·{" "}
-                <span className="text-mag">senior backend</span> ·{" "}
-                <span className="text-acid">founding eng.</span> ·{" "}
-                <span className="text-amber">deep contracts</span> ·{" "}
-                <span className="text-blood">pen-tester / red team</span>
+                Open to:{" "}
+                {profile.openTo.map((r, i) => (
+                  <span key={r.label}>
+                    {i > 0 && " · "}
+                    <span className={TONE_TEXT[r.tone]}>{r.label.toLowerCase()}</span>
+                  </span>
+                ))}
               </p>
             </div>
 
@@ -144,7 +153,7 @@ export function Hero() {
             </Magnetic>
             <span className="ml-auto hidden md:inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-ash">
               <Wifi className="h-3 w-3 text-acid" />
-              LISTENING / paul.lukic94@gmail.com
+              LISTENING / {profile.email}
             </span>
           </div>
         </div>
@@ -179,17 +188,17 @@ function ScrollReactiveH1() {
       className="font-display mt-4 leading-[0.86] tracking-tighter text-bone uppercase will-change-transform"
     >
       <span className="block text-[15vw] sm:text-[13vw] md:text-[10vw] lg:text-[8.5rem] font-light">
-        <DecodeOnView text="PAUL" durationMs={900} threshold={0.01} />
+        <DecodeOnView text={profile.first} durationMs={900} threshold={0.01} />
       </span>
       <span className="block text-[15vw] sm:text-[13vw] md:text-[10vw] lg:text-[8.5rem] font-light italic">
         <DecodeOnView
-          text="LUKIĆ"
+          text={profile.last}
           durationMs={1100}
           threshold={0.01}
           className="text-bone glow-cyan"
         />
         <sup className="ml-1.5 sm:ml-3 align-top text-[0.2em] sm:text-[0.22em] not-italic font-mono font-medium tracking-[0.14em] sm:tracking-[0.18em] text-mag glow-mag whitespace-nowrap">
-          /lu·kitch/
+          {profile.pronounce}
         </sup>
       </span>
     </motion.div>
@@ -304,7 +313,7 @@ function Hud() {
       {/* bottom-left coordinates */}
       <div className="hidden lg:block absolute bottom-20 left-6 z-10 font-mono text-[10px] uppercase tracking-[0.22em] text-fade space-y-0.5">
         <div>VOL.III · ED.2026</div>
-        <div className="text-cyan">FILE: PL-94-001</div>
+        <div className="text-cyan">FILE: {profile.fileId}</div>
         <div className="text-mag">BUILD: NEON.7</div>
       </div>
 

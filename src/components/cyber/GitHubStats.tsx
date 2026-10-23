@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Github, GitBranch, Users, Star } from "lucide-react";
+import { social } from "@/content/profile";
 
 type Stats = {
   repos: number;
@@ -8,7 +9,7 @@ type Stats = {
   lastRepo?: string;
 };
 
-const USER = "paullukic";
+const USER = social.github.user;
 const CACHE_KEY = "gh-stats-v1";
 const CACHE_TTL_MS = 10 * 60 * 1000; // 10 min (happy path)
 const ERR_BACKOFF_MS = 60 * 60 * 1000; // 1 hour (after rate-limit)

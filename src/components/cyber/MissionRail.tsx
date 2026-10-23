@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
+import { sections } from "@/content/sections";
 
-const SECTIONS = [
-  { id: "top", label: "HERO" },
-  { id: "brief", label: "BRIEF" },
-  { id: "selected", label: "WORK" },
-  { id: "ledger", label: "LEDGER" },
-  { id: "now", label: "NOW" },
-  { id: "toolkit", label: "TOOLKIT" },
-  { id: "lab", label: "LAB" },
-  { id: "contact", label: "PING" },
-];
+const SECTIONS = sections;
 
 export function MissionRail() {
   const [active, setActive] = useState("top");

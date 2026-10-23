@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { X, ArrowUpRight, Target, Wrench, CheckCircle2, AlertTriangle } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { social } from "@/content/profile";
 
 export type CaseStudy = {
   problem: string;
@@ -289,7 +290,7 @@ export function CaseDrawer({
                 <div className="border border-rule-strong bg-void/60 p-6 font-mono text-[11px] uppercase tracking-[0.22em] text-fade">
                   {">"} CASE_STUDY <span className="text-amber">CLASSIFIED</span> · extended
                   write-up available on request via{" "}
-                  <a href="mailto:paul.lukic94@gmail.com" className="text-cyan underline underline-offset-2">
+                  <a href={social.email.href} className="text-cyan underline underline-offset-2">
                     direct line
                   </a>
                   .

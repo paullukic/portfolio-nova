@@ -2,15 +2,10 @@ import { useEffect, useState } from "react";
 import { Github, Linkedin, FileText, Mail, Menu, X } from "lucide-react";
 import { GlitchText, HoverDecode } from "./GlitchText";
 import { Magnetic } from "./Magnetic";
+import { navSections } from "@/content/sections";
+import { profile, social } from "@/content/profile";
 
-const NAV = [
-  { id: "brief", label: "BRIEF" },
-  { id: "selected", label: "WORK" },
-  { id: "ledger", label: "LEDGER" },
-  { id: "now", label: "NOW" },
-  { id: "toolkit", label: "TOOLKIT" },
-  { id: "lab", label: "LAB" },
-];
+const NAV = navSections.map((s) => ({ id: s.id, label: s.navLabel ?? s.label }));
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -47,10 +42,10 @@ export function Nav() {
             </span>
             <span className="hidden sm:flex flex-col leading-none min-w-0">
               <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bone truncate">
-                <GlitchText text="PAUL_LUKIĆ" intensity={0.25} />
+                <GlitchText text={`${profile.first}_${profile.last}`} intensity={0.25} />
               </span>
               <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.32em] text-fade truncate">
-                netrunner_94 / dossier
+                {profile.handle} / dossier
               </span>
             </span>
           </a>
@@ -73,19 +68,21 @@ export function Nav() {
 
           {/* right cluster — md+ icons */}
           <div className="hidden md:flex items-center gap-2 ml-auto lg:ml-4">
-            <Icon href="https://github.com/paullukic" label="GitHub">
+            <Icon href={social.github.href} label="GitHub">
               <Github className="h-4 w-4" />
             </Icon>
-            <Icon href="https://www.linkedin.com/in/paul-lukic/" label="LinkedIn">
+            <Icon href={social.linkedin.href} label="LinkedIn">
               <Linkedin className="h-4 w-4" />
             </Icon>
-            <Icon href="/Paul_Lukic_CV.pdf" download label="CV">
-              <FileText className="h-4 w-4" />
-            </Icon>
+            {profile.cv && (
+              <Icon href={profile.cv} download label="CV">
+                <FileText className="h-4 w-4" />
+              </Icon>
+            )}
 
             <Magnetic strength={0.35} radius={110}>
               <a
-                href="mailto:paul.lukic94@gmail.com"
+                href={social.email.href}
                 className="relative ml-1 inline-flex items-center gap-2 px-4 py-2 font-mono text-[10.5px] font-bold uppercase tracking-[0.24em] text-void bg-cyan transition-all hover:bg-acid"
                 style={{
                   clipPath:
@@ -132,18 +129,20 @@ export function Nav() {
         </nav>
 
         <div className="mx-auto max-w-[1480px] px-4 py-4 flex items-center gap-2">
-          <Icon href="https://github.com/paullukic" label="GitHub">
+          <Icon href={social.github.href} label="GitHub">
             <Github className="h-4 w-4" />
           </Icon>
-          <Icon href="https://www.linkedin.com/in/paul-lukic/" label="LinkedIn">
+          <Icon href={social.linkedin.href} label="LinkedIn">
             <Linkedin className="h-4 w-4" />
           </Icon>
-          <Icon href="/Paul_Lukic_CV.pdf" download label="CV">
-            <FileText className="h-4 w-4" />
-          </Icon>
+          {profile.cv && (
+            <Icon href={profile.cv} download label="CV">
+              <FileText className="h-4 w-4" />
+            </Icon>
+          )}
 
           <a
-            href="mailto:paul.lukic94@gmail.com"
+            href={social.email.href}
             onClick={() => setOpen(false)}
             className="relative ml-auto inline-flex items-center gap-2 px-4 py-2 font-mono text-[10.5px] font-bold uppercase tracking-[0.24em] text-void bg-cyan"
             style={{

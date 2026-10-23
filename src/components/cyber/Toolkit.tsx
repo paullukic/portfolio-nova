@@ -1,63 +1,31 @@
 import { motion } from "motion/react";
 import { DecodeOnView } from "./GlitchText";
 import { SectionWatermark } from "./SectionWatermark";
+import { skills, type SkillCategory } from "@/content/skills";
+import { certs, schooling, spokenLanguages } from "@/content/certs";
 import { Server, Monitor, Code, Hammer, Target, GraduationCap, Shield, Languages } from "lucide-react";
 
 type Tone = "cyan" | "mag" | "acid" | "amber";
 
-type Category = {
-  label: string;
-  tone: Tone;
-  icon: typeof Server;
-  items: string[];
+type Category = SkillCategory & { icon: typeof Server };
+
+const ICONS: Record<SkillCategory["id"], typeof Server> = {
+  backend: Server,
+  frontend: Monitor,
+  languages: Code,
+  infra: Hammer,
+  practices: Target,
 };
 
-const BACKEND: Category = {
-  label: "BACKEND",
-  tone: "cyan",
-  icon: Server,
-  items: [
-    "JAVA", "SPRING_BOOT", "MODULITH", "POSTGRESQL", "TIMESCALEDB",
-    "MYSQL", "FIREBASE", "RABBITMQ", "REDIS", "KEYCLOAK", "STRIPE",
-  ],
-};
+const byId = Object.fromEntries(
+  skills.map((c) => [c.id, { ...c, icon: ICONS[c.id] }]),
+) as Record<SkillCategory["id"], Category>;
 
-const FRONTEND: Category = {
-  label: "FRONTEND",
-  tone: "mag",
-  icon: Monitor,
-  items: [
-    "REACT_19", "SVELTE_5", "SVELTEKIT_2", "TAILWIND",
-    "HTML / CSS", "KNOCKOUT.JS", "REDUX", "CANVAS",
-  ],
-};
-
-const LANGUAGES: Category = {
-  label: "LANGUAGES",
-  tone: "acid",
-  icon: Code,
-  items: ["TYPESCRIPT", "JAVASCRIPT", "JAVA", "SQL", "PYTHON", "PHP", "BASH"],
-};
-
-const INFRA: Category = {
-  label: "INFRA & OPS",
-  tone: "amber",
-  icon: Hammer,
-  items: [
-    "GIT", "DOCKER", "ARGOCD", "MAVEN", "TERRAFORM", "VERCEL",
-    "SENTRY", "GLITCHTIP",
-  ],
-};
-
-const PRACTICES: Category = {
-  label: "PRACTICES",
-  tone: "cyan",
-  icon: Target,
-  items: [
-    "CODE_REVIEW", "MENTORSHIP", "OBSERVABILITY", "TESTING",
-    "OPENAPI", "AI_TOOLING", "SEO / A11Y", "PEN-TESTING",
-  ],
-};
+const BACKEND = byId.backend;
+const FRONTEND = byId.frontend;
+const LANGUAGES = byId.languages;
+const INFRA = byId.infra;
+const PRACTICES = byId.practices;
 
 export function Toolkit() {
   return (
@@ -83,7 +51,7 @@ export function Toolkit() {
             <div className="text-right">
               <div className="text-fade">STACK</div>
               <div className="mt-1 text-bone num-tab text-lg">
-                {BACKEND.items.length + FRONTEND.items.length + LANGUAGES.items.length + INFRA.items.length + PRACTICES.items.length}
+                {skills.reduce((n, c) => n + c.items.length, 0)}
                 <span className="text-fade text-xs"> TOOLS</span>
               </div>
             </div>
@@ -119,22 +87,22 @@ export function Toolkit() {
             tone="cyan"
             icon={<GraduationCap className="h-3.5 w-3.5" />}
             label="// SCHOOLING"
-            title="INFORMATION TECHNOLOGY TECHNICIAN"
-            sub="Secondary School Krupanj · graduated 2013"
+            title={schooling.title}
+            sub={schooling.sub}
           />
           <BottomCard
             tone="mag"
             icon={<Shield className="h-3.5 w-3.5" />}
             label="// CERTIFICATIONS"
-            title="COMPTIA PENTEST+"
-            sub="+ TryHackMe Jr. Penetration Tester"
+            title={certs[0].title.toUpperCase()}
+            sub={`+ ${certs.slice(1).map((c) => `${c.issuer} ${c.title}`).join(" · ")}`}
           />
           <BottomCard
             tone="acid"
             icon={<Languages className="h-3.5 w-3.5" />}
             label="// LANGUAGES"
-            title="SERBIAN — NATIVE"
-            sub="English — proficient · German — basic"
+            title={spokenLanguages.title}
+            sub={spokenLanguages.sub}
           />
         </div>
       </div>

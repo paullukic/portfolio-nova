@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { DecodeOnView } from "./GlitchText";
 import { SectionWatermark } from "./SectionWatermark";
+import { profile, social } from "@/content/profile";
+import { projects } from "@/content/projects";
+import { stackSummary } from "@/content/skills";
 
 const BOOT_LINES = [
-  "[ BOOT ] netrunner_94 v2026.04 — kernel ok",
-  "[ AUTH ] subject = PAUL_LUKIC · clearance = PUBLIC",
+  `[ BOOT ] ${profile.handle} v2026.10 — kernel ok`,
+  `[ AUTH ] subject = ${profile.first}_LUKIC · clearance = PUBLIC`,
   "[ NET  ] handshake @ NOVI_SAD ↔ /dev/grid",
   "[ MEM  ] loading wire_bio.txt … OK",
   "[ RDY  ] dossier streaming — type `help` for commands",
@@ -27,7 +30,7 @@ const COMMANDS: Record<
       "  whoami               who is PL-94-001",
       "  ls [projects|stack]  list artifacts",
       "  cat <file>           read a file (try: wire_bio.txt)",
-      "  goto <section>       jump to section (brief / work / ledger / now / toolkit / lab / contact)",
+      "  goto <section>       jump to section (brief / work / ledger / now / toolkit / clearance / lab / contact)",
       "  contact              show direct line",
       "  sudo hire            see availability",
       "  clear                clear terminal",
@@ -36,10 +39,10 @@ const COMMANDS: Record<
   whoami: {
     help: "identify subject",
     run: () => [
-      "PL-94-001 · PAUL_LUKIĆ · /lu·kitch/",
-      "senior full-stack · six years shipping",
+      `${profile.fileId} · ${profile.first}_${profile.last} · ${profile.pronounce}`,
+      `${profile.title.toLowerCase()} · shipping since ${profile.since}`,
       "Java/Spring backends · React/Svelte frontends",
-      "currently @ INVT (Cybergrid) · based Novi Sad · CET",
+      `currently @ ${profile.currently.org} (${profile.currently.product}) · based Novi Sad · CET`,
     ],
   },
   ls: {
@@ -49,27 +52,14 @@ const COMMANDS: Record<
       if (sub === "projects" || !sub) {
         return [
           "PROJECTS:",
-          "  01  COOGRAPH              OSS · LIVE · coograph.com",
-          "  02  CYBERGRID_PLATFORM    INVT · SHIPPING",
-          "  03  CLUING                Cluing · LIVE",
-          "  04  GASTARBAJTER24        Solo · ONGOING · 150 MAU",
-          "  05  IGELPHONE             Solo · ONGOING · DE STORE + ADMIN",
-          "  06  TEODESK_TIMELINE      Teodesk · ARCHIVED",
-          "  07  ARCADE_SUITE          4bees · DELIVERED",
-          "  08  RESULT_COUNTER        Chrome · ACQUIRED",
-          "  09  COR_TECH_UI_MATRIX    US · ARCHIVED",
-          "  10  PAXHAX                Personal · PUBLIC",
+          ...projects.map(
+            (p, i) =>
+              `  ${String(i + 1).padStart(2, "0")}  ${p.title.padEnd(20)}  ${p.client.split(" · ")[0]} · ${p.status}`,
+          ),
         ];
       }
       if (sub === "stack") {
-        return [
-          "STACK:",
-          "  lang    Java · TypeScript · JavaScript · SQL",
-          "  back    Spring Boot · Modulith · Postgres · TimescaleDB · RabbitMQ · MQTT · Keycloak",
-          "  front   React 19 · Svelte 5 · SvelteKit 2 · Tailwind 4",
-          "  infra   Firebase · Docker · Kubernetes · ArgoCD · Terraform",
-          "  sec     PenTest+ · TryHackMe JP · red-team review",
-        ];
+        return ["STACK:", ...stackSummary];
       }
       return [`ls: unknown arg '${sub}'`];
     },
@@ -80,19 +70,13 @@ const COMMANDS: Record<
       const file = args[0]?.toLowerCase();
       if (!file) return ["cat: missing file"];
       if (file === "wire_bio.txt") {
-        return [
-          "Six years shipping Java/Spring backends + React/Svelte frontends.",
-          "Founded a product (Gastarbajter24 · 150 MAU zero CAC).",
-          "Sold a Chrome extension (2K+ users).",
-          "Mentors by default. Ships by deadline. Red-team minded.",
-          "Listening for senior IC / senior backend / founding eng / deep contracts.",
-        ];
+        return [...profile.bio];
       }
       if (file === "readme" || file === "readme.md") {
         return [
           "# PL-94-001",
           "",
-          "press `/` for command palette · numbers `1-8` to jump sections · `?` for help",
+          "press `/` for command palette · numbers `1-9` to jump sections · `?` for help",
         ];
       }
       return [`cat: no such file '${args[0]}'`];
@@ -108,6 +92,8 @@ const COMMANDS: Record<
         ledger: "ledger",
         now: "now",
         toolkit: "toolkit",
+        clearance: "clearance",
+        sec: "clearance",
         lab: "lab",
         contact: "contact",
         ping: "contact",
@@ -123,10 +109,10 @@ const COMMANDS: Record<
     help: "show direct line",
     run: () => [
       "DIRECT_LINE:",
-      "  email       paul.lukic94@gmail.com",
-      "  linkedin    /in/paul-lukic",
-      "  github      @paullukic",
-      "  response    ≤ 24h · CET",
+      `  email       ${profile.email}`,
+      `  linkedin    ${social.linkedin.value}`,
+      `  github      ${social.github.value}`,
+      `  response    ${profile.response} · CET`,
     ],
   },
   sudo: {
@@ -136,12 +122,8 @@ const COMMANDS: Record<
         return [
           "[SUDO] permission granted — you're hired (conditionally).",
           "OPEN TO:",
-          "  · senior full-stack (Java + TS)",
-          "  · senior backend (Spring · Modulith)",
-          "  · founding engineer · early stage",
-          "  · deep contracts · 3–12 months",
-          "  · pen-test / red-team engagements",
-          "NEXT STEP: email paul.lukic94@gmail.com",
+          ...profile.openTo.map((r) => `  · ${r.label.toLowerCase()}`),
+          `NEXT STEP: email ${profile.email}`,
         ];
       }
       return [`sudo: unknown op '${args[0] ?? ""}'`];
@@ -209,59 +191,21 @@ export function Manifesto() {
           <div className="col-span-12 lg:col-span-7 space-y-8">
             <p className="font-display text-2xl md:text-[2.1rem] leading-[1.18] text-bone text-pretty">
               <span className="float-left mr-3 mt-1 font-display text-[5rem] leading-[0.78] text-cyan glow-cyan">
-                S
+                F
               </span>
-              enior full-stack developer with six years across{" "}
+              ull stack developer, shipping since {profile.since} across{" "}
               <span className="text-cyan">Java/Spring</span> backends and{" "}
               <span className="text-mag">React/Svelte</span> frontends. I make
               systems that scale and interfaces that don't waste anyone's
-              afternoon. Backend rigor, frontend taste, mentorship in the
-              margins, security-aware by training. Available for senior IC,
-              senior IC, founding-engineer or deep contract roles.
+              afternoon. Backend rigor, frontend taste, my own products after
+              hours, security-aware by training. Open to full-stack, backend,
+              founding-engineer or deep contract roles.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">
-              <Capability
-                label="// BACKEND"
-                color="cyan"
-                title="Distributed Spring services"
-                bullets={[
-                  "Spring Boot · Modulith · Postgres · TimescaleDB · RabbitMQ · Redis · Keycloak",
-                  "Currently on Cybergrid at INVT: MQTT protocol fixes, observability rollouts, multi-repo WebClient → RestClient migration",
-                  "Comfortable with contract-first dev (OpenAPI), modulith decomposition and fixing time-windowing bugs nobody else wants",
-                ]}
-              />
-              <Capability
-                label="// FRONTEND"
-                color="mag"
-                title="Production React + Svelte"
-                bullets={[
-                  "React 19 · Svelte 5 (runes) · SvelteKit 2 · TypeScript strict · Tailwind 4",
-                  "Rebuilt a text-highlight engine four times chasing peak performance; built a custom PDF viewer with CORS bypass",
-                  "Comfortable shipping complex stateful UIs, a11y, SEO and design-system work",
-                ]}
-              />
-              <Capability
-                label="// PRODUCT"
-                color="acid"
-                title="End-to-end ownership"
-                bullets={[
-                  "Founded Gastarbajter24 solo — SvelteKit + Firebase, 150 MAU in 6 months at zero CAC, +200% organic via i18n + structured data",
-                  "Built and sold a Chrome extension to 2,000+ users",
-                  "Owns product, design, infrastructure and roadmap when needed",
-                ]}
-              />
-              <Capability
-                label="// SECURITY · OPEN_FOR_HIRE"
-                color="amber"
-                title="Pen-tester / red team"
-                bullets={[
-                  "CompTIA PenTest+ certified · TryHackMe Jr. Penetration Tester",
-                  "Maintains Paxhax — a working notebook on tooling, exploits and responsible disclosure",
-                  "Brings a red-team mindset to code review and threat modelling on every project",
-                  "Available for paid pen-test engagements, security reviews and red-team contracts",
-                ]}
-              />
+              {profile.capabilities.map((c) => (
+                <Capability key={c.label} label={c.label} color={c.tone} title={c.title} bullets={c.bullets} />
+              ))}
             </div>
           </div>
         </div>

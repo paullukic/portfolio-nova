@@ -1,46 +1,23 @@
+import { marqueeStack } from "@/content/skills";
+import { projects } from "@/content/projects";
+import { experience } from "@/content/experience";
+import { certs } from "@/content/certs";
 import { useEffect, useState } from "react";
 
-const TOP = [
-  "JAVA",
-  "SPRING_BOOT",
-  "MODULITH",
-  "POSTGRES",
-  "TIMESCALEDB",
-  "RABBITMQ",
-  "REDIS",
-  "KEYCLOAK",
-  "DOCKER",
-  "TERRAFORM",
-  "ARGOCD",
-  "REACT_19",
-  "SVELTE_5",
-  "SVELTEKIT_2",
-  "TYPESCRIPT",
-  "TAILWIND",
-  "FIREBASE",
-  "MYSQL",
-  "KNOCKOUT.JS",
-  "CANVAS",
-  "MCP",
-  "SQLITE",
-  "TREE_SITTER",
-  "PYTHON",
-];
+const TOP = marqueeStack;
 
+// Bottom row: every project plus the employers that have no plate of their own
+// (a plate covers an employer when its id matches or its client strip names it).
+const plated = new Set(projects.map((p) => p.id));
+const clientOrgs = new Set(projects.map((p) => p.client.split(" ")[0].toUpperCase()));
 const BOT = [
-  "// COOGRAPH",
-  "// CYBERGRID",
-  "// COLLABWRITING",
-  "// GASTARBAJTER24",
-  "// IGELPHONE",
-  "// 4BEES",
-  "// TEODESK",
-  "// COR_TECH_GROUP",
-  "// PAXHAX",
-  "// GOOGLE_RESULT_COUNTER",
-  "// COMPTIA_PENTEST+",
-  "// TRYHACKME_JR_PENTESTER",
-];
+  ...projects.map((p) => p.short),
+  ...experience
+    .filter((e) => !plated.has(e.id) && !clientOrgs.has(e.org.split(/[ .(]/)[0]))
+    .map((e) => e.org),
+  "PAXHAX",
+  ...certs.map((c) => c.title.toUpperCase().replace(/[ .]+/g, "_")),
+].map((label) => `// ${label}`);
 
 const GLITCH_CHARS = "█▓▒░◼◻◇◆◢◤◣◥¥§¤";
 

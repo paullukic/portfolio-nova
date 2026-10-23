@@ -1,3 +1,5 @@
+import type React from "react";
+import type { DiagramKey } from "@/content/types";
 /**
  * Small decorative SVG diagrams per project — each one hints visually at the
  * product/domain. Uses currentColor so tone propagates from parent.
@@ -469,16 +471,109 @@ export function DiagramGraph() {
   );
 }
 
-export function DiagramFor(title: string) {
-  if (title.includes("COOGRAPH")) return <DiagramGraph />;
-  if (title.includes("CYBERGRID")) return <DiagramGrid />;
-  if (title.includes("COLLABWRITING") || title.includes("CLUING")) return <DiagramHighlight />;
-  if (title.includes("GASTARBAJTER")) return <DiagramMap />;
-  if (title.includes("IGELPHONE")) return <DiagramShop />;
-  if (title.includes("TEODESK")) return <DiagramTimeline />;
-  if (title.includes("ARCADE")) return <DiagramGame />;
-  if (title.includes("RESULT_COUNTER")) return <DiagramSpike />;
-  if (title.includes("COR_TECH")) return <DiagramBlocks />;
-  if (title.includes("PAXHAX")) return <DiagramShield />;
-  return null;
+export function DiagramAudit() {
+  /* Score gauge + meta-tag rows — METASPRY */
+  const rows = [0.9, 0.6, 0.8, 0.45, 0.7];
+  return (
+    <svg viewBox="0 0 240 140" className="h-full w-full">
+      <path d="M 30 105 A 50 50 0 0 1 130 105" fill="none" stroke="currentColor" strokeOpacity={0.25} strokeWidth={8} />
+      <path
+        d="M 30 105 A 50 50 0 0 1 130 105"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={8}
+        strokeDasharray="157"
+        strokeDashoffset="30"
+      >
+        <animate attributeName="stroke-dashoffset" values="157;30;30" dur="4s" repeatCount="indefinite" />
+      </path>
+      <text x="80" y="100" textAnchor="middle" fill="currentColor" fontSize="20" fontFamily="monospace">
+        81
+      </text>
+      {rows.map((w, i) => (
+        <g key={i}>
+          <rect x={150} y={22 + i * 20} width={8} height={8} fill="currentColor" fillOpacity={0.7} />
+          <rect x={164} y={23 + i * 20} width={60 * w} height={6} fill="currentColor" fillOpacity={0.35}>
+            <animate
+              attributeName="width"
+              values={`0;${60 * w};${60 * w}`}
+              dur={`${3 + i * 0.4}s`}
+              repeatCount="indefinite"
+            />
+          </rect>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+export function DiagramCards() {
+  /* Fanned cards with a foil sweep — DBUDDY */
+  const cards = [-18, -6, 6, 18];
+  return (
+    <svg viewBox="0 0 240 140" className="h-full w-full">
+      <defs>
+        <linearGradient id="dbuddy-foil" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0" stopColor="currentColor" stopOpacity={0} />
+          <stop offset="0.5" stopColor="currentColor" stopOpacity={0.5} />
+          <stop offset="1" stopColor="currentColor" stopOpacity={0} />
+          <animateTransform attributeName="gradientTransform" type="translate" values="-1 0;1 0" dur="3s" repeatCount="indefinite" />
+        </linearGradient>
+      </defs>
+      {cards.map((deg, i) => (
+        <g key={i} transform={`rotate(${deg} 120 150)`}>
+          <rect x={98} y={22} width={44} height={64} rx={3} fill="none" stroke="currentColor" strokeOpacity={0.6} />
+          <rect x={103} y={28} width={34} height={26} fill="currentColor" fillOpacity={0.15} />
+          <rect x={98} y={22} width={44} height={64} rx={3} fill="url(#dbuddy-foil)" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+export function DiagramLifts() {
+  /* Set log bars climbing to a PR — LIFTORRA */
+  const sets = [40, 46, 50, 55, 52, 60, 64, 70];
+  return (
+    <svg viewBox="0 0 240 140" className="h-full w-full">
+      <line x1="15" y1="120" x2="225" y2="120" stroke="currentColor" strokeOpacity={0.4} />
+      {sets.map((v, i) => (
+        <rect
+          key={i}
+          x={20 + i * 26}
+          y={120 - v * 1.4}
+          width={16}
+          height={v * 1.4}
+          fill="currentColor"
+          fillOpacity={i === sets.length - 1 ? 0.8 : 0.3}
+        >
+          <animate attributeName="fill-opacity" values="0.15;0.6;0.15" dur={`${2 + i * 0.25}s`} repeatCount="indefinite" />
+        </rect>
+      ))}
+      <text x={20 + 7 * 26 + 8} y={14} textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="monospace">
+        PR
+      </text>
+    </svg>
+  );
+}
+
+const DIAGRAMS: Record<DiagramKey, () => React.JSX.Element> = {
+  graph: DiagramGraph,
+  grid: DiagramGrid,
+  highlight: DiagramHighlight,
+  map: DiagramMap,
+  shop: DiagramShop,
+  timeline: DiagramTimeline,
+  game: DiagramGame,
+  spike: DiagramSpike,
+  blocks: DiagramBlocks,
+  shield: DiagramShield,
+  audit: DiagramAudit,
+  cards: DiagramCards,
+  lifts: DiagramLifts,
+};
+
+export function DiagramFor(key: DiagramKey) {
+  const Diagram = DIAGRAMS[key];
+  return <Diagram />;
 }
