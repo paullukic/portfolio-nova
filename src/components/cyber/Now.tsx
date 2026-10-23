@@ -179,7 +179,7 @@ export function Now() {
                     </div>
                   </div>
                   <div
-                    className={`shrink-0 font-mono text-[9px] uppercase tracking-[0.22em] ${
+                    className={`shrink-0 font-mono text-[10px] uppercase tracking-[0.22em] ${
                       r.status === "Finished" ? "text-fade" : r.status === "Re-read" ? "text-cyan" : "text-acid glow-acid"
                     }`}
                   >

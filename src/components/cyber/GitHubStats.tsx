@@ -132,12 +132,12 @@ export function GitHubStats() {
       </dl>
 
       {stats?.lastRepo && !degraded && (
-        <div className="mt-3 font-mono text-[9.5px] uppercase tracking-[0.22em] text-fade">
+        <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fade">
           MOST_RECENT: <span className="text-bone">{stats.lastRepo}</span>
         </div>
       )}
       {degraded && (
-        <div className="mt-3 font-mono text-[9.5px] uppercase tracking-[0.22em] text-fade">
+        <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fade">
           <span className="text-amber">⚠</span> upstream rate-limited · live data
           at <span className="text-bone">github.com/{USER}</span>
         </div>
@@ -153,7 +153,7 @@ function Cell({ icon, k, v }: { icon: React.ReactNode; k: string | number; v: st
         {icon}
         <span className="font-zen text-lg md:text-xl text-bone num-tab leading-none">{k}</span>
       </div>
-      <div className="mt-1.5 font-mono text-[9px] uppercase tracking-[0.22em] text-fade">{v}</div>
+      <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-fade">{v}</div>
     </div>
   );
 }

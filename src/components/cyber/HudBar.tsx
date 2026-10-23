@@ -138,7 +138,7 @@ export function HudBar() {
                       isActive ? "bg-acid" : "bg-fade"
                     }`}
                   />
-                  <span className="text-[9.5px]">
+                  <span className="text-[10px]">
                     {String(i).padStart(2, "0")} {s.navLabel ?? s.label}
                   </span>
                 </a>

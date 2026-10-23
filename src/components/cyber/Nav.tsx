@@ -44,7 +44,7 @@ export function Nav() {
               <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bone truncate">
                 <GlitchText text={`${profile.first}_${profile.last}`} intensity={0.25} />
               </span>
-              <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.32em] text-fade truncate">
+              <span className="mt-1 font-mono text-[10px] uppercase tracking-[0.32em] text-fade truncate">
                 {profile.handle} / dossier
               </span>
             </span>

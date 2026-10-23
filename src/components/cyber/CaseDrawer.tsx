@@ -203,7 +203,7 @@ export function CaseDrawer({
                       >
                         {m.k}
                       </div>
-                      <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.22em] text-ash">
+                      <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-ash">
                         {m.v}
                       </div>
                     </li>
@@ -322,7 +322,7 @@ export function CaseDrawer({
                   className="inline-flex items-center gap-2 px-5 py-2.5 border border-rule-strong font-mono text-[11px] uppercase tracking-[0.24em] text-ash hover:border-cyan hover:text-cyan"
                 >
                   CLOSE
-                  <span className="font-mono text-[9px] text-fade">ESC</span>
+                  <span className="font-mono text-[10px] text-fade">ESC</span>
                 </button>
               </div>
             </div>

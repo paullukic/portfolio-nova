@@ -255,7 +255,7 @@ export function CommandPalette() {
             placeholder="Type a command or section… / , ? for help"
             className="flex-1 bg-transparent outline-none font-mono text-[13px] text-bone placeholder:text-fade"
           />
-          <span className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-fade">
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-fade">
             ↑↓ · ⏎
           </span>
         </div>
@@ -305,7 +305,7 @@ export function CommandPalette() {
                       )}
                     </span>
                     {c.kbd && (
-                      <span className="shrink-0 border border-rule-strong px-1.5 py-0.5 text-[9.5px] text-fade">
+                      <span className="shrink-0 border border-rule-strong px-1.5 py-0.5 text-[10px] text-fade">
                         {c.kbd}
                       </span>
                     )}
@@ -321,7 +321,7 @@ export function CommandPalette() {
           </ul>
         )}
 
-        <div className="flex items-center justify-between border-t border-rule px-4 py-2 font-mono text-[9.5px] uppercase tracking-[0.22em] text-fade">
+        <div className="flex items-center justify-between border-t border-rule px-4 py-2 font-mono text-[10px] uppercase tracking-[0.22em] text-fade">
           <span>
             <span className="text-cyan">/</span> or{" "}
             <span className="text-cyan">⌘K</span> anywhere · <span className="text-cyan">?</span> for help

@@ -83,7 +83,7 @@ export default function NotFound() {
           </a>
         </div>
 
-        <p className="mt-10 font-mono text-[9.5px] uppercase tracking-[0.32em] text-fade">
+        <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.32em] text-fade">
           © {new Date().getFullYear()} · PAUL_LUKIC · ALL_NODES_RESERVED
         </p>
       </div>

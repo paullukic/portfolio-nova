@@ -136,7 +136,7 @@ function Row({
           {entry.stack.map((t) => (
             <li
               key={t}
-              className={`border ${tone.border} bg-deck px-2 py-1 font-mono text-[9.5px] uppercase tracking-[0.18em] text-ash`}
+              className={`border ${tone.border} bg-deck px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ash`}
             >
               {t}
             </li>

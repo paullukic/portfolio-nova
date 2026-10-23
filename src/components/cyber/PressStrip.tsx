@@ -61,7 +61,7 @@ export function PressStrip() {
                   <HoverDecode text={n.label} durationMs={420} />
                 </span>
               </div>
-              <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-fade">
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-fade">
                 {n.sub}
               </span>
             </li>

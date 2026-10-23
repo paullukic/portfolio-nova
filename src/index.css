@@ -8,7 +8,7 @@
   --color-rule-strong: rgba(0, 240, 255, 0.32);
   --color-bone: #e8f4ff;
   --color-ash: #95a8c4;
-  --color-fade: #4a5872;
+  --color-fade: #72819c; /* 5.2:1 on void, AA for the small mono labels */
 
   --color-cyan: #00f0ff;
   --color-mag: #ff1f8e;
@@ -416,6 +416,11 @@
     right: -1px;
     border-left: 0;
     border-top: 0;
+  }
+  /* sections with their own accent (e.g. /CLEARANCE in blood) recolour the
+     registration brackets so they don't fall back to cyan */
+  .brackets-blood .corner-bracket {
+    border-color: var(--color-blood);
   }
 
   /* marquee */
