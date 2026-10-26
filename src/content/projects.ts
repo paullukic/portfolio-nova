@@ -232,7 +232,7 @@ export const projects: Project[] = [
         "PDFs served without CORS: the bypass pipeline had to be secure, cacheable and fast",
       ],
       outcome:
-        "Product rebranded from Collabwriting to Cluing and shipped its most performant highlight engine yet. Internal tooling and mentorship patterns are still in use by the team.",
+        "Product rebranded from Collabwriting to Cluing and shipped its most performant highlight engine yet. Left the team with internal tooling and mentorship patterns it adopted.",
       stack: [
         "SvelteKit 2", "Svelte 5", "TypeScript", "Spring Boot", "Java",
         "MySQL", "Tiptap", "PDF.js", "Sentry", "Tailwind",
