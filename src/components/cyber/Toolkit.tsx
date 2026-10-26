@@ -1,5 +1,6 @@
 import { m as motion } from "motion/react";
 import { DecodeOnView } from "./GlitchText";
+import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { skills, type SkillCategory } from "@/content/skills";
 import { certs, schooling, spokenLanguages } from "@/content/certs";
@@ -46,6 +47,7 @@ export function Toolkit() {
               <span className="text-acid glow-acid italic">/</span>
               <DecodeOnView text="TOOLKIT" durationMs={700} />
             </h2>
+            <SectionDek id="toolkit" />
           </div>
           <div data-reveal className="flex items-center gap-6 font-mono text-[10.5px] uppercase tracking-[0.28em]">
             <div className="text-right">

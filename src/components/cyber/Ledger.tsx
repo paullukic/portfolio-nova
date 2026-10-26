@@ -1,4 +1,5 @@
 import { DecodeOnView } from "./GlitchText";
+import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { experience } from "@/content/experience";
 import type { Experience } from "@/content/types";
@@ -29,6 +30,7 @@ export function Ledger() {
               <span className="text-mag glow-mag italic">/</span>
               <DecodeOnView text="LEDGER" durationMs={700} />
             </h2>
+            <SectionDek id="ledger" />
           </div>
           <div data-reveal className="flex items-center gap-6 font-mono text-[10.5px] uppercase tracking-[0.28em]">
             <div className="text-right">

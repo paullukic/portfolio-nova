@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { DecodeOnView } from "./GlitchText";
+import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { profile, social } from "@/content/profile";
 import { projects } from "@/content/projects";
@@ -154,6 +155,7 @@ export function Manifesto() {
               <span className="text-cyan glow-cyan italic">/</span>
               <DecodeOnView text="BRIEF" durationMs={700} />
             </h2>
+            <SectionDek id="brief" />
           </div>
           <div data-reveal className="flex items-center gap-6 font-mono text-[10.5px] uppercase tracking-[0.28em]">
             <div className="text-right">
@@ -193,13 +195,14 @@ export function Manifesto() {
               <span className="float-left mr-3 mt-1 font-display text-[5rem] leading-[0.78] text-cyan glow-cyan">
                 F
               </span>
-              ull stack developer, shipping since {profile.since} across{" "}
-              <span className="text-cyan">Java/Spring</span> backends and{" "}
-              <span className="text-mag">React/Svelte</span> frontends. I make
-              systems that scale and interfaces that don't waste anyone's
-              afternoon. Backend rigor, frontend taste, my own products after
-              hours, security-aware by training. Open to full-stack, backend,
-              founding-engineer or deep contract roles.
+              ull stack developer since {profile.since}. Most days that means{" "}
+              <span className="text-cyan">Java/Spring</span> services behind{" "}
+              <span className="text-mag">React/Svelte</span> interfaces, taken
+              from first commit to production and kept running after. I build
+              and run my own products too, so I care about the screen as much
+              as the query behind it. I'm PenTest+ certified, and it shows in how
+              I review code. Open to full-stack, backend, founding-engineer or
+              deep contract roles.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">

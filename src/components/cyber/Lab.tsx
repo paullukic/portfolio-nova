@@ -1,5 +1,6 @@
 import { ArrowUpRight, Terminal as TerminalIcon, MonitorSmartphone } from "lucide-react";
 import { DecodeOnView } from "./GlitchText";
+import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { GitHubStats } from "./GitHubStats";
 import { relics, type Relic } from "@/content/archive";
@@ -26,6 +27,7 @@ export function Lab() {
               <span className="text-mag glow-mag italic">/</span>
               <DecodeOnView text="THE_LAB" durationMs={700} />
             </h2>
+            <SectionDek id="lab" />
           </div>
           <div data-reveal className="flex items-center gap-6 font-mono text-[10.5px] uppercase tracking-[0.28em]">
             <div className="text-right">

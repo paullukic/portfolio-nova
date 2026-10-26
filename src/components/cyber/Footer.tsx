@@ -1,5 +1,6 @@
 import { ArrowUpRight, Github, Linkedin, Mail, FileText, Check, Clock, MapPin } from "lucide-react";
 import { GlitchText, DecodeOnView } from "./GlitchText";
+import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { profile, social } from "@/content/profile";
 
@@ -23,6 +24,7 @@ export function Footer() {
               <span className="text-mag glow-mag italic">/</span>
               <DecodeOnView text="PING_ME" durationMs={800} />
             </h2>
+            <SectionDek id="contact" />
           </div>
           <div data-reveal className="flex items-center gap-6 font-mono text-[10.5px] uppercase tracking-[0.28em]">
             <div className="text-right">
@@ -53,11 +55,11 @@ export function Footer() {
               </p>
             </div>
             <p className="mt-4 text-ash text-[14px] leading-relaxed text-pretty">
-              Currently engineering the {profile.currently.product} backend at{" "}
-              {profile.currently.org}, and building my own products after hours.
-              Quietly listening for the next strong fit: a full-stack or backend
-              seat, a founding-engineer role at an early-stage company, or a deep
-              contract on something interesting.
+              I work on the {profile.currently.product} backend at{" "}
+              {profile.currently.org} and run my own products after hours. I'm
+              looking for the next strong fit: a full-stack or backend role, a
+              founding-engineer seat at an early-stage company, a deep contract on
+              a hard problem, or a paid pen-test engagement.
             </p>
           </div>
 
@@ -121,10 +123,10 @@ export function Footer() {
             </a>
 
             <p className="mt-8 max-w-xl font-display text-xl md:text-2xl text-ash leading-snug text-pretty">
-              Best way to reach me. Tell me the role, the team and one thing
-              that makes the problem interesting — I'll reply with a real answer
-              within a day. Especially keen on Spring backends, Svelte/React
-              frontends, energy systems or quietly gorgeous interfaces.
+              Email is the fastest uplink. Send the role, the team and the one
+              thing that makes the problem interesting, and you'll get a real
+              answer within 24 hours. I'm keenest on Spring backends, Svelte or
+              React frontends, energy systems and quietly gorgeous interfaces.
             </p>
           </div>
 

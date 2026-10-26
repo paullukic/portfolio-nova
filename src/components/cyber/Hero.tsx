@@ -95,16 +95,17 @@ export function Hero() {
                 <span className="text-fade">042/042 BYTES</span>
               </div>
               <p className="mt-4 font-display text-lg md:text-xl leading-snug text-bone text-pretty">
-                {profile.title}. Shipping{" "}
+                {profile.title}. I build{" "}
                 <span className="text-cyan glow-cyan">Java/Spring</span> backends and{" "}
-                <span className="text-mag glow-mag">React/Svelte</span> frontends since {profile.since}:
-                grid-scale energy infra at{" "}
+                <span className="text-mag glow-mag">React/Svelte</span> frontends, and
+                have shipped both since {profile.since}. By day I work on grid-scale
+                energy software at{" "}
                 <span className="text-acid glow-acid">
                   {profile.currently.org}/{profile.currently.product}
-                </span>{" "}
-                by day, my own products after hours:{" "}
+                </span>
+                . After hours I run my own products:{" "}
                 {profile.afterHours.slice(0, -1).join(", ")} and {profile.afterHours.at(-1)}.
-                Sold a Chrome extension, mentor by default, ship by deadline.
+                I also built and sold a Chrome extension. Mentor by default, ship by deadline.
               </p>
               <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ash">
                 Open to:{" "}

@@ -77,4 +77,5 @@ export type Experience = {
   press?: { label: string; sub: string };
 };
 
-export type Section = { id: string; label: string; navLabel?: string };
+/** `dek` is the plain-language line under a section title, for readers who skip the flavor. */
+export type Section = { id: string; label: string; navLabel?: string; dek?: string };

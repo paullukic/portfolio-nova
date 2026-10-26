@@ -1,6 +1,7 @@
 import { Hammer, BookOpen, Headphones, Mail, ArrowRight, Code2 } from "lucide-react";
 import { m as motion } from "motion/react";
 import { DecodeOnView } from "./GlitchText";
+import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { now } from "@/content/now";
 import { profile, social } from "@/content/profile";
@@ -35,6 +36,7 @@ export function Now() {
               <span className="text-mag glow-mag italic">/</span>
               <DecodeOnView text="NOW" durationMs={700} />
             </h2>
+            <SectionDek id="now" />
           </div>
           <div data-reveal className="flex items-center gap-6 font-mono text-[10.5px] uppercase tracking-[0.28em]">
             <div className="text-right">

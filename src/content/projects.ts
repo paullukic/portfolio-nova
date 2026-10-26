@@ -15,7 +15,7 @@ export const projects: Project[] = [
     kind: "oss",
     client: "OSS · 2026 → ongoing · Solo author",
     blurb:
-      "Open-source, graph-first context layer for AI coding. One workflow, eight tools (Claude Code, Copilot, Codex CLI, OpenCode, Cursor, Devin Desktop, Aider, Cline). A SQLite + tree-sitter code graph served over MCP replaces grep-then-read with targeted dependency queries. Ships specialized agents, Claude Code lifecycle hooks and the OpenSpec proposal flow.",
+      "Open-source toolkit that helps AI coding assistants find the right code without reading the whole repo. One workflow, eight tools (Claude Code, Copilot, Codex CLI, OpenCode, Cursor, Devin Desktop, Aider, Cline). A SQLite + tree-sitter code graph served over MCP replaces grep-then-read with targeted dependency queries. Ships specialized agents, Claude Code lifecycle hooks and the OpenSpec proposal flow.",
     tags: ["MCP", "SQLITE", "TREE_SITTER", "PYTHON", "CLAUDE_CODE", "OPENSPEC", "MIT"],
     status: "LIVE",
     tone: "blood",
@@ -59,7 +59,7 @@ export const projects: Project[] = [
     kind: "employment",
     client: "INVT · 2025 → present · Backend",
     blurb:
-      "Grid-scale energy platform. Routing control messages between TSOs and distributed assets across a Spring/Modulith microservice fleet. Shipped a protocol fix that corrected downstream aggregation, restored device geo-metadata, rolled JVM metrics across the platform, and is leading a multi-repo WebClient → RestClient migration.",
+      "Software that lets grid operators (TSOs) control distributed energy assets. I work on the Spring/Modulith services that route those control messages. Shipped a protocol fix that corrected downstream aggregation, restored device geo-metadata and rolled JVM metrics across the platform. Now leading a multi-repo WebClient → RestClient migration.",
     tags: ["SPRING_BOOT", "MODULITH", "TIMESCALEDB", "RABBITMQ", "ARGOCD", "TERRAFORM", "KEYCLOAK"],
     status: "SHIPPING",
     tone: "cyan",
@@ -206,7 +206,7 @@ export const projects: Project[] = [
     kind: "employment",
     client: "Cluing (ex-Collabwriting) · 2023 → 2025 · Full-Stack + Mentor",
     blurb:
-      "Research SaaS for serious readers (rebranded from Collabwriting to Cluing). Rebuilt the core highlight engine four times chasing peak performance, shipped a custom PDF viewer with CORS bypass, social scrapers (Reddit/X/Quora/YT/LinkedIn), Kindle notes sync, Tiptap editor, fuzzy AI search and a theming system. Mentored juniors and set long-term code quality direction.",
+      "Research app that lets readers highlight and search what they read across the web, PDFs and Kindle (rebranded from Collabwriting to Cluing). Rebuilt the core highlight engine four times chasing peak performance, shipped a custom PDF viewer with CORS bypass, social scrapers (Reddit/X/Quora/YT/LinkedIn), Kindle notes sync, Tiptap editor, fuzzy AI search and a theming system. Mentored juniors and set long-term code quality direction.",
     tags: ["SVELTEKIT", "SPRING", "MYSQL", "SENTRY"],
     status: "LIVE",
     tone: "mag",

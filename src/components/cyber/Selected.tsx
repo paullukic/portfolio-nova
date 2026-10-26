@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState } from "react";
 import { ArrowUpRight, FileSearch } from "lucide-react";
 import { DecodeOnView } from "./GlitchText";
+import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { HoloCard } from "./HoloCard";
 import { DiagramFor } from "./ProjectDiagrams";
@@ -62,12 +63,13 @@ export function Selected() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
           <div data-reveal>
             <div className="font-mono text-[10.5px] uppercase tracking-[0.32em] text-cyan glow-cyan">
-              &gt;&gt; HOLO_MARKET · CLICK ANY PLATE FOR DEEP_DIVE
+              &gt;&gt; HOLO_MARKET · PROJECT_INDEX
             </div>
             <h2 className="mt-2 font-display uppercase text-[11vw] sm:text-5xl md:text-7xl lg:text-[7rem] xl:text-[8.5rem] leading-[0.88] tracking-[-0.04em] text-bone">
               <span className="text-cyan glow-cyan italic">/</span>
               <DecodeOnView text="SELECTED_WORK" durationMs={800} />
             </h2>
+            <SectionDek id="selected" />
           </div>
           <div data-reveal className="flex items-center gap-6 font-mono text-[10.5px] uppercase tracking-[0.28em]">
             <div className="text-right">

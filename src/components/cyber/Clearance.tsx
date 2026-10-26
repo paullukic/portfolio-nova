@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { ArrowUpRight, Lock, Shield, ShieldAlert } from "lucide-react";
 import { DecodeOnView } from "./GlitchText";
+import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { certs, offensiveToolkit, paxhax } from "@/content/certs";
 
@@ -33,6 +34,7 @@ export function Clearance() {
               <span className="text-blood glow-blood italic">/</span>
               <DecodeOnView text="CLEARANCE" durationMs={700} />
             </h2>
+            <SectionDek id="clearance" />
           </div>
           <div data-reveal className="flex items-center gap-6 font-mono text-[10.5px] uppercase tracking-[0.28em]">
             <div className="text-right">
