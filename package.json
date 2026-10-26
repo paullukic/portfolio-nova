@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit -p .",
     "check": "npm run typecheck && npm run lint",
     "check:site": "node scripts/check-site.mjs",
+    "perf:check": "node scripts/perf-check.mjs",
     "og": "node scripts/og.mjs",
     "shoot": "node scripts/shoot.mjs",
     "qa": "node scripts/qa.mjs"

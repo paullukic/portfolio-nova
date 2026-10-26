@@ -3,6 +3,7 @@ import { ArrowDownRight, Wifi, Cpu, Shield, Zap } from "lucide-react";
 import { m as motion, useReducedMotion, useScroll, useSpring, useTransform, useVelocity } from "motion/react";
 import { GlitchText, DecodeText, DecodeOnView } from "./GlitchText";
 import { MobileHeroBg } from "./MobileHeroBg";
+import { EffectBoundary } from "./EffectBoundary";
 import { HeroParallax } from "./HeroParallax";
 import { Magnetic } from "./Magnetic";
 import { profile } from "@/content/profile";
@@ -29,6 +30,8 @@ const TONE_TEXT = {
 
 export function Hero() {
   const heavy = useHeavy();
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const sceneActive = useOnScreenAndVisible(sceneRef);
 
   return (
     <section
@@ -36,11 +39,13 @@ export function Hero() {
       className="relative isolate min-h-screen overflow-hidden grain"
     >
       {/* 3D scene OR mobile fallback */}
-      <div className="absolute inset-0 z-0">
+      <div ref={sceneRef} className="absolute inset-0 z-0">
         {heavy ? (
-          <Suspense fallback={<MobileHeroBg />}>
-            <HeroScene />
-          </Suspense>
+          <EffectBoundary fallback={<MobileHeroBg />}>
+            <Suspense fallback={<MobileHeroBg />}>
+              <HeroScene active={sceneActive} />
+            </Suspense>
+          </EffectBoundary>
         ) : (
           <MobileHeroBg />
         )}
@@ -257,6 +262,31 @@ function StatNum({ stat, delay }: { stat: Stat; delay: number }) {
       {stat.suffix}
     </div>
   );
+}
+
+/**
+ * True while the element intersects the viewport and the tab is visible.
+ * Same gate BlackwallField uses for its own loop; HeroScene stops its
+ * frameloop when this goes false.
+ */
+function useOnScreenAndVisible(ref: React.RefObject<HTMLElement | null>) {
+  const [onScreen, setOnScreen] = useState(true);
+  const [tabVisible, setTabVisible] = useState(true);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    // a fast scroll can deliver enter + leave in one batch: the last entry wins
+    const io = new IntersectionObserver((entries) => setOnScreen(entries[entries.length - 1].isIntersecting));
+    io.observe(el);
+    const onVisibility = () => setTabVisible(!document.hidden);
+    onVisibility();
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [ref]);
+  return onScreen && tabVisible;
 }
 
 function useHeavy() {

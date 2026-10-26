@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { ArrowUpRight, Lock, Shield, ShieldAlert } from "lucide-react";
 import { DecodeOnView } from "./GlitchText";
+import { EffectBoundary } from "./EffectBoundary";
 import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { certs, offensiveToolkit, paxhax, tryhackme } from "@/content/certs";
@@ -16,9 +17,11 @@ export function Clearance() {
       className="brackets-blood relative py-28 md:py-40 border-t border-blood/40 overflow-hidden bg-void"
     >
       <div className="pointer-events-none absolute inset-0">
-        <Suspense fallback={null}>
-          <BlackwallField className="absolute inset-0" />
-        </Suspense>
+        <EffectBoundary>
+          <Suspense fallback={null}>
+            <BlackwallField className="absolute inset-0" />
+          </Suspense>
+        </EffectBoundary>
       </div>
       {/* keep text readable over the wall */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,7,0.88)_0%,rgba(5,5,7,0.55)_50%,rgba(5,5,7,0.15)_100%)]" />

@@ -189,12 +189,20 @@ function Parallax() {
   return null;
 }
 
-export default function HeroScene() {
+/**
+ * `active` is false while the hero is off-screen or the tab is hidden (Hero
+ * owns that observer); the frameloop then stops entirely, so the scene costs
+ * nothing below the fold. Per-frame cost is kept down too: the canvas skips
+ * its own MSAA (the composer renders into its own multisampled target, so the
+ * canvas pass was duplicate work) and DPR is capped at 1.25.
+ */
+export default function HeroScene({ active = true }: { active?: boolean }) {
   return (
     <Canvas
-      dpr={[1, 1.6]}
+      frameloop={active ? "always" : "never"}
+      dpr={[1, 1.25]}
       camera={{ position: [0, 0.4, 6.5], fov: 60 }}
-      gl={{ antialias: true, alpha: true }}
+      gl={{ antialias: false, alpha: true }}
     >
       <color attach="background" args={["#050507"]} />
       <fog attach="fog" args={["#050507", 8, 22]} />
@@ -221,6 +229,7 @@ export default function HeroScene() {
       <Sparkles count={120} scale={[14, 8, 8]} size={1.5} speed={0.3} color="#ff1f8e" opacity={0.7} />
       <Sparkles count={60} scale={[14, 8, 8]} size={1.2} speed={0.2} color="#defb00" opacity={0.6} />
 
+      {/* the composer's MSAA (default 8x) is the one that smooths the lines */}
       <EffectComposer>
         <Bloom intensity={1.1} luminanceThreshold={0.15} luminanceSmoothing={0.6} mipmapBlur />
         <ChromaticAberration

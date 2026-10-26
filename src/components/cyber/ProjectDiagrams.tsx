@@ -1,5 +1,6 @@
 import type React from "react";
 import type { DiagramKey } from "@/content/types";
+import { PauseOffscreen } from "./PauseOffscreen";
 /**
  * Small decorative SVG diagrams per project — each one hints visually at the
  * product/domain. Uses currentColor so tone propagates from parent.
@@ -575,5 +576,9 @@ const DIAGRAMS: Record<DiagramKey, () => React.JSX.Element> = {
 
 export function DiagramFor(key: DiagramKey) {
   const Diagram = DIAGRAMS[key];
-  return <Diagram />;
+  return (
+    <PauseOffscreen>
+      <Diagram />
+    </PauseOffscreen>
+  );
 }

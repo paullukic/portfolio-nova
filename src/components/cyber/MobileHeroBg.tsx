@@ -1,10 +1,15 @@
+import { useRef } from "react";
+import { usePauseSmilOffscreen } from "./PauseOffscreen";
+
 /**
  * Lightweight CSS/SVG-only hero background for mobile / no-3D devices.
  * Mimics the wireframe + grid feel without R3F + bloom cost.
  */
 export function MobileHeroBg() {
+  const ref = useRef<HTMLDivElement>(null);
+  usePauseSmilOffscreen(ref);
   return (
-    <div className="absolute inset-0">
+    <div ref={ref} className="absolute inset-0">
       <div className="absolute inset-0 grid-floor opacity-50" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(5,5,7,0.85)_85%)]" />
 

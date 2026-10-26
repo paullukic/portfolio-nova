@@ -184,8 +184,9 @@ export default function BlackwallField({ className = "" }: { className?: string 
       if (!raf && visible && !document.hidden) raf = requestAnimationFrame(loop);
     };
 
-    const io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
+    // a fast scroll can deliver enter + leave in one batch: the last entry wins
+    const io = new IntersectionObserver((entries) => {
+      visible = entries[entries.length - 1].isIntersecting;
       kick();
     });
     io.observe(canvas);

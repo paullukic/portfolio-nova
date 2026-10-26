@@ -19,6 +19,7 @@ import { Footer } from "@/components/cyber/Footer";
 import { Divider } from "@/components/cyber/Divider";
 import { SmoothScroll } from "@/components/cyber/SmoothScroll";
 import { AccentMorph } from "@/components/cyber/AccentMorph";
+import { EffectBoundary } from "@/components/cyber/EffectBoundary";
 
 // Optional extras: none of these matter for first paint, so each ships in its own chunk.
 const lazyNamed = <K extends string>(load: () => Promise<Record<K, React.ComponentType>>, name: K) =>
@@ -74,11 +75,13 @@ export default function Home() {
       </a>
       <SmoothScroll />
       <AccentMorph />
-      <Suspense fallback={null}>
-        <CyberCursor />
-        <MatrixRain />
-        <AmbientAudio />
-      </Suspense>
+      <EffectBoundary>
+        <Suspense fallback={null}>
+          <CyberCursor />
+          <MatrixRain />
+          <AmbientAudio />
+        </Suspense>
+      </EffectBoundary>
       <BootOverlay />
       <RevealObserver />
       <Nav />
@@ -101,10 +104,12 @@ export default function Home() {
       <Footer />
       <MissionRail />
       <HudBar />
-      <Suspense fallback={null}>
-        <CommandPalette />
-        <ThemeSwitcher />
-      </Suspense>
+      <EffectBoundary>
+        <Suspense fallback={null}>
+          <CommandPalette />
+          <ThemeSwitcher />
+        </Suspense>
+      </EffectBoundary>
     </main>
   );
 }
