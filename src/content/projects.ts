@@ -55,13 +55,13 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "cybergrid",
-    title: "CYBERGRID_PLATFORM",
-    short: "CYBERGRID",
+    id: "grid-platform",
+    title: "GRID_CONTROL_PLATFORM",
+    short: "GRID_CTRL",
     kind: "employment",
     client: "INVT · Dec 2025 → present · Software Engineer",
     blurb:
-      "CyberGrid's platform lets grid operators (TSOs) control distributed energy assets. At INVT I work on the Spring/Modulith services that route those control messages. Shipped a protocol fix that corrected downstream aggregation, restored device geo-metadata and rolled JVM metrics across the platform. Now leading a multi-repo WebClient → RestClient migration.",
+      "This platform lets grid operators (TSOs) control distributed energy assets. At INVT I work on the Spring/Modulith services that route those control messages. Shipped a protocol fix that corrected downstream aggregation, restored device geo-metadata and rolled JVM metrics across the platform. Now leading a multi-repo WebClient → RestClient migration.",
     tags: ["SPRING_BOOT", "MODULITH", "TIMESCALEDB", "RABBITMQ", "ARGOCD", "TERRAFORM", "KEYCLOAK"],
     status: "SHIPPING",
     tone: "cyan",

@@ -4,7 +4,7 @@ import type { Tone } from "./types";
 export const now = {
   asOf: "2026-10-23",
   shipping: [
-    { k: "INVT / Cybergrid", v: "MQTT · observability", active: true },
+    { k: "INVT / grid platform", v: "MQTT · observability", active: true },
     { k: "Metaspry", v: "extension + cloud app", active: true },
     { k: "Liftorra", v: "MVP · building now", active: true },
     { k: "Coograph", v: "OSS · code-graph fixes", active: true },

@@ -26,11 +26,11 @@ export const experience: Experience[] = [
     year: "2025",
     span: "DEC_2025 — PRESENT",
     org: "INVT",
-    role: "SOFTWARE_ENGINEER · CYBERGRID",
+    role: "SOFTWARE_ENGINEER · GRID_CONTROL",
     location: "NOVI_SAD, RS",
     link: "https://invt.tech",
     tone: "cyan",
-    press: { label: "INVT", sub: "CYBERGRID · 2025—NOW" },
+    press: { label: "INVT", sub: "GRID_CONTROL · 2025—NOW" },
     highlights: [
       "Shipped a protocol fix in the MQTT gateway: control-message `to` timestamp now aligns with `from + device failure delay`, correcting downstream aggregation across the platform.",
       "Restored missing latitude/longitude on devices, eliminating a class of integration bugs around asset/location metadata for downstream consumers.",

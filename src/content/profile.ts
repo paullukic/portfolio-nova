@@ -21,7 +21,7 @@ export const profile = {
   response: "≤ 24 hours",
   stackLine: "JAVA · SPRING · REACT · SVELTE · FIREBASE",
   email: "paul.lukic94@gmail.com",
-  currently: { org: "INVT", product: "Cybergrid", link: "https://invt.tech" },
+  currently: { org: "INVT", product: "grid platform", link: "https://invt.tech" },
   /** Own products named in the hero bio. */
   afterHours: ["Coograph", "Metaspry", "DBuddy", "Liftorra"],
   /** No CV PDF ships until an up-to-date one exists (the old one predates INVT). */
@@ -42,7 +42,7 @@ export const profile = {
   /** Plain-text bio used by the terminal `cat wire_bio.txt` and the closing status. */
   bio: [
     `Shipping Java/Spring backends + React/Svelte frontends since ${SINCE}.`,
-    "Currently on Cybergrid at INVT. Author of Coograph (OSS).",
+    "Currently on grid-control software at INVT. Author of Coograph (OSS).",
     "Builds and runs his own products: Metaspry, DBuddy, Liftorra (in progress).",
     "Built and runs Gastarbajter24 solo (150 MAU, zero CAC). Sold a Chrome extension (2K+ users).",
     "Mentors by default. Ships by deadline. Red-team minded.",
@@ -54,7 +54,7 @@ export const profile = {
       title: "Distributed Spring services",
       bullets: [
         "Spring Boot · Modulith · Postgres · TimescaleDB · RabbitMQ · Redis · Keycloak",
-        "Currently on Cybergrid at INVT: MQTT protocol fixes, observability rollouts, multi-repo WebClient → RestClient migration",
+        "Currently on INVT's grid-control platform: MQTT protocol fixes, observability rollouts, multi-repo WebClient → RestClient migration",
         "Comfortable with contract-first dev (OpenAPI), modulith decomposition and fixing time-windowing bugs nobody else wants",
       ],
     },

@@ -33,7 +33,7 @@ export const changelog: ChangelogEntry[] = [
       "New `blood` tone wired across theme (CSS var, glow class, tone unions in Selected/CaseDrawer/PressStrip/Ledger)",
       "CaseDrawer: fixed scroll inside drawer (Lenis was hijacking wheel) via data-lenis-prevent + overscroll-contain",
       "Selected card DETAIL + VISIT buttons: bumped left padding for breathing room",
-      "Cybergrid downgraded feature → wide so Coograph dominates the grid alone",
+      "Grid platform downgraded feature → wide so Coograph dominates the grid alone",
     ],
   },
   {

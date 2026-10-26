@@ -6,7 +6,7 @@ import type { DiagramKey } from "@/content/types";
  */
 
 export function DiagramGrid() {
-  /* Grid energy topology — CYBERGRID */
+  /* Grid energy topology — GRID_CONTROL */
   return (
     <svg viewBox="0 0 240 140" className="h-full w-full">
       <defs>
