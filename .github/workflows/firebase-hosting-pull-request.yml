@@ -1,22 +1,23 @@
-# Preview channel for a PR (hosting target "main"). Manual only for now, see README.md.
-name: Preview paullukic.com (manual)
-on:
-  workflow_dispatch:
+# Preview channel for each PR (hosting target "main"); the action comments the preview URL on the PR.
+name: Deploy to Firebase Hosting on PR
+on: pull_request
 permissions:
   checks: write
   contents: read
   pull-requests: write
 jobs:
   build_and_preview:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
-          cache: npm
+          node-version-file: '.nvmrc'
+          cache: 'npm'
       - run: npm ci
       - run: npm run check
+      # the prerender step renders / in a real browser
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0

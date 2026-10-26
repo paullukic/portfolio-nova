@@ -1,20 +1,27 @@
 # Production deploy of paullukic.com (hosting target "main" -> site "paullukic-com").
-# Manual only: deploys are triggered by Hermes after Paul confirms. Do not add a push trigger
-# until the domain cutover checklist in README.md is done.
-name: Deploy paullukic.com (manual)
+# Runs on every push to master (this repo's default branch); can also be run by hand.
+# build:release fails on TODO(paul) markers, PII and dead links, so a bad build never ships.
+name: Deploy to Firebase Hosting on merge
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
+concurrency:
+  group: hosting-live
+  cancel-in-progress: false
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
-          cache: npm
+          node-version-file: '.nvmrc'
+          cache: 'npm'
       - run: npm ci
       - run: npm run check
+      # the prerender step renders / in a real browser
       - run: npx playwright install --with-deps chromium
       - run: npm run build:release
       - uses: FirebaseExtended/action-hosting-deploy@v0

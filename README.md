@@ -52,6 +52,6 @@ Cutover checklist (Hermes / Paul):
 3. `npm run build:release`, then deploy: `firebase deploy --only hosting:main --project cyberpunk-portfolio-paxhax`.
 4. In the Firebase console, remove `paullukic.com` (and `www.paullukic.com` if listed) from Hosting in `portfolio-fa807`, leaving `terminal.paullukic.com` attached there. Then add `paullukic.com` (apex) to site `paullukic-com`, and add `www.paullukic.com` as a redirect to the apex.
 5. Add `paullukic.com` as a site in Plausible (the script now reports to that domain).
-6. Optional: re-enable push-triggered deploys in `.github/workflows/`.
+6. Push-triggered deploys: on. Every push to `master` runs `build:release` and deploys to the live channel; every same-repo PR gets a preview channel. Both need the `FIREBASE_SERVICE_ACCOUNT_CYBERPUNK_PORTFOLIO_PAXHAX` Actions secret (a service-account JSON key for `cyberpunk-portfolio-paxhax`).
 
 The redirect `/gui/*` → `terminal.paullukic.com/gui/*` keeps the old Win98 link alive. Unknown paths get the themed 404.
