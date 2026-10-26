@@ -11,7 +11,7 @@ export const sections: Section[] = [
   { id: "ledger", label: "LEDGER", dek: "Every role so far, newest first, with what I shipped in each." },
   { id: "now", label: "NOW", dek: "What I'm building, learning and reading this month." },
   { id: "toolkit", label: "TOOLKIT", dek: "The languages, frameworks and infrastructure I use in production, grouped by layer." },
-  { id: "clearance", label: "CLEARANCE", navLabel: "SEC", dek: "Security work: my penetration-testing certifications and Paxhax, my notebook on tools and exploits." },
+  { id: "clearance", label: "CLEARANCE", navLabel: "SEC", dek: "Security work: my penetration-testing training, my TryHackMe profile and Paxhax, my notebook on tools and exploits." },
   { id: "lab", label: "LAB", dek: "Side projects, live GitHub activity and every earlier version of this site, still online." },
   { id: "contact", label: "PING", dek: "Hiring, a contract or a question? Email reaches me fastest." },
 ];

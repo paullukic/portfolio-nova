@@ -1,9 +1,10 @@
-import { ArrowUpRight, Terminal as TerminalIcon, MonitorSmartphone } from "lucide-react";
+import { ArrowUpRight, Code, Terminal as TerminalIcon, MonitorSmartphone } from "lucide-react";
 import { DecodeOnView } from "./GlitchText";
 import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
 import { GitHubStats } from "./GitHubStats";
 import { relics, type Relic } from "@/content/archive";
+import { sideBuilds } from "@/content/lab";
 
 type Tone = Relic["tone"];
 
@@ -47,6 +48,21 @@ export function Lab() {
           <GitHubStats />
         </div>
 
+        {/* Side builds: small public tools */}
+        <div className="mb-10" data-reveal>
+          <div className="flex items-center gap-3 mb-4 font-mono text-[10px] uppercase tracking-[0.32em] text-fade">
+            <span className="inline-block h-px w-6 bg-acid" />
+            <span className="text-acid">//</span>
+            SIDE_BUILDS · OFF_GRID_TOOLS
+            <span className="inline-block h-px w-6 bg-acid" />
+          </div>
+          <div className="grid gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {sideBuilds.map((r) => (
+              <Small key={r.id} relic={r} />
+            ))}
+          </div>
+        </div>
+
         {/* Relics strip: every earlier portfolio, kept online */}
         <div data-reveal>
           <div className="flex items-center gap-3 mb-4 font-mono text-[10px] uppercase tracking-[0.32em] text-fade">
@@ -67,7 +83,7 @@ export function Lab() {
 }
 
 function Small({ relic }: { relic: Relic }) {
-  const Icon = relic.icon === "terminal" ? TerminalIcon : MonitorSmartphone;
+  const Icon = relic.icon === "terminal" ? TerminalIcon : relic.icon === "code" ? Code : MonitorSmartphone;
   return (
     <a
       href={relic.link}

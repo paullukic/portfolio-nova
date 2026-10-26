@@ -200,8 +200,8 @@ export function Manifesto() {
               <span className="text-mag">React/Svelte</span> interfaces, taken
               from first commit to production and kept running after. I build
               and run my own products too, so I care about the screen as much
-              as the query behind it. I'm PenTest+ certified, and it shows in how
-              I review code. Open to full-stack, backend, founding-engineer or
+              as the query behind it. I trained in penetration testing on
+              TryHackMe, and it shows in how I review code. Open to full-stack, backend, founding-engineer or
               deep contract roles.
             </p>
 

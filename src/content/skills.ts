@@ -66,5 +66,5 @@ export const stackSummary = [
   "  back    Spring Boot · Modulith · Postgres · TimescaleDB · RabbitMQ · MQTT · Keycloak",
   "  front   React 19 · Svelte 5 · SvelteKit 2 · Astro · Expo · Tailwind 4",
   "  infra   Firebase · Docker · Kubernetes · ArgoCD · Terraform · Cloudflare",
-  "  sec     PenTest+ · TryHackMe JPT · red-team review",
+  "  sec     THM PenTest+ & JPT paths · red-team review",
 ];

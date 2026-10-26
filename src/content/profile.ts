@@ -21,7 +21,7 @@ export const profile = {
   response: "≤ 24 hours",
   stackLine: "JAVA · SPRING · REACT · SVELTE · FIREBASE",
   email: "paul.lukic94@gmail.com",
-  currently: { org: "INVT", product: "Cybergrid", link: "https://www.cyber-grid.com" },
+  currently: { org: "INVT", product: "Cybergrid", link: "https://invt.tech" },
   /** Own products named in the hero bio. */
   afterHours: ["Coograph", "Metaspry", "DBuddy", "Liftorra"],
   /** No CV PDF ships until an up-to-date one exists (the old one predates INVT). */
@@ -44,7 +44,7 @@ export const profile = {
     `Shipping Java/Spring backends + React/Svelte frontends since ${SINCE}.`,
     "Currently on Cybergrid at INVT. Author of Coograph (OSS).",
     "Builds and runs his own products: Metaspry, DBuddy, Liftorra (in progress).",
-    "Founded Gastarbajter24 (150 MAU, zero CAC). Sold a Chrome extension (2K+ users).",
+    "Built and runs Gastarbajter24 solo (150 MAU, zero CAC). Sold a Chrome extension (2K+ users).",
     "Mentors by default. Ships by deadline. Red-team minded.",
   ],
   capabilities: [
@@ -74,7 +74,7 @@ export const profile = {
       title: "End-to-end ownership",
       bullets: [
         "Runs Metaspry solo: free Chrome extension, paid SvelteKit + Firebase app, Astro marketing site",
-        "Founded Gastarbajter24 solo: 150 MAU in 6 months at zero CAC, +200% organic via i18n + structured data",
+        "Sole engineer on Gastarbajter24: 150 MAU in 6 months at zero CAC, +200% organic via i18n + structured data",
         "Building Liftorra, a social workout app: SvelteKit PWA + Expo native app on Firebase",
       ],
     },
@@ -83,7 +83,7 @@ export const profile = {
       tone: "amber",
       title: "Pen-tester / red team",
       bullets: [
-        "CompTIA PenTest+ certified · TryHackMe Jr. Penetration Tester",
+        "Completed TryHackMe's CompTIA PenTest+ and Jr. Penetration Tester paths (2023)",
         "Maintains Paxhax: a working notebook on tooling, exploits and responsible disclosure",
         "Brings a red-team mindset to code review and threat modelling on every project",
         "Available for paid pen-test engagements, security reviews and red-team contracts",

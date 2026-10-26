@@ -3,7 +3,7 @@ import { ArrowUpRight, Lock, Shield, ShieldAlert } from "lucide-react";
 import { DecodeOnView } from "./GlitchText";
 import { SectionDek } from "./SectionDek";
 import { SectionWatermark } from "./SectionWatermark";
-import { certs, offensiveToolkit, paxhax } from "@/content/certs";
+import { certs, offensiveToolkit, paxhax, tryhackme } from "@/content/certs";
 
 const BlackwallField = lazy(() => import("./BlackwallField"));
 
@@ -138,9 +138,15 @@ export function Clearance() {
                 OPEN_NOTEBOOK
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-fade">
-                pen-test · red team · disclosure
-              </span>
+              <a
+                href={tryhackme.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-fade hover:text-blood transition-colors"
+              >
+                TryHackMe / {tryhackme.handle}
+                <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
             </div>
           </article>
         </div>

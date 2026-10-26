@@ -93,8 +93,8 @@ if (html) {
 
 // 4. outbound links (opt-in, needs network)
 if (args.has("--links")) {
-  // Hosts that block non-browser clients; a 403/999 from them is not a dead link.
-  const BOT_WALLED = ["wisehosting.com", "linkedin.com"];
+  // Hosts that block non-browser clients; a 403/429/999 from them is not a dead link.
+  const BOT_WALLED = ["wisehosting.com", "linkedin.com", "tryhackme.com"];
   const urls = new Set();
   for (const file of await walk(join(ROOT, "src/content"), [".ts"])) {
     for (const m of (await readFile(file, "utf8")).matchAll(/https:\/\/[^\s"'`)]+/g)) urls.add(m[0]);

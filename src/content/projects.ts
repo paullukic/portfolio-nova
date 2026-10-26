@@ -22,9 +22,10 @@ export const projects: Project[] = [
     diagram: "graph",
     link: "https://coograph.com",
     span: "feature",
+    // Star count is a GitHub snapshot (2026-10-26); bump it by hand.
     metrics: [
       { k: "8", v: "AI tools wired" },
-      { k: "MCP", v: "code-graph server" },
+      { k: "17★", v: "github stars" },
       { k: "MIT", v: "open source" },
     ],
     caseStudy: {
@@ -37,6 +38,7 @@ export const projects: Project[] = [
         "Shipped Claude Code lifecycle hooks that block edits to generated files, log every bash command to an audit trail, warn on out-of-scope edits and report graph state at session start",
         "Added the OpenSpec workflow (Plan → Propose → Apply → Review → Archive) with a project-sync layer so template updates reach every registered project",
         "Built an interactive D3 force-directed visualizer so users can see what the agent sees before they trust it",
+        "Built coograph-testbed, a separate end-to-end suite that installs the code graph into real Python, TypeScript/React, Go and Java projects and checks what it finds, run after every graph change",
       ],
       challenges: [
         "No single command works across all eight tools: each registers custom workflows differently (slash commands, $-prefixed skills, rules files, plugin events), so eight invocation paths converge on the same agent procedures",
@@ -57,14 +59,14 @@ export const projects: Project[] = [
     title: "CYBERGRID_PLATFORM",
     short: "CYBERGRID",
     kind: "employment",
-    client: "INVT · 2025 → present · Backend",
+    client: "INVT · Dec 2025 → present · Software Engineer",
     blurb:
-      "Software that lets grid operators (TSOs) control distributed energy assets. I work on the Spring/Modulith services that route those control messages. Shipped a protocol fix that corrected downstream aggregation, restored device geo-metadata and rolled JVM metrics across the platform. Now leading a multi-repo WebClient → RestClient migration.",
+      "CyberGrid's platform lets grid operators (TSOs) control distributed energy assets. At INVT I work on the Spring/Modulith services that route those control messages. Shipped a protocol fix that corrected downstream aggregation, restored device geo-metadata and rolled JVM metrics across the platform. Now leading a multi-repo WebClient → RestClient migration.",
     tags: ["SPRING_BOOT", "MODULITH", "TIMESCALEDB", "RABBITMQ", "ARGOCD", "TERRAFORM", "KEYCLOAK"],
     status: "SHIPPING",
     tone: "cyan",
     diagram: "grid",
-    link: "https://www.cyber-grid.com",
+    link: "https://invt.tech",
     span: "tall",
     metrics: [
       { k: "MQTT", v: "protocol fix" },
@@ -204,7 +206,7 @@ export const projects: Project[] = [
     title: "CLUING",
     short: "CLUING",
     kind: "employment",
-    client: "Cluing (ex-Collabwriting) · 2023 → 2025 · Full-Stack + Mentor",
+    client: "Cluing (ex-Collabwriting) · 2022 → 2025 · Full-Stack + Mentor",
     blurb:
       "Research app that lets readers highlight and search what they read across the web, PDFs and Kindle (rebranded from Collabwriting to Cluing). Rebuilt the core highlight engine four times chasing peak performance, shipped a custom PDF viewer with CORS bypass, social scrapers (Reddit/X/Quora/YT/LinkedIn), Kindle notes sync, Tiptap editor, fuzzy AI search and a theming system. Mentored juniors and set long-term code quality direction.",
     tags: ["SVELTEKIT", "SPRING", "MYSQL", "SENTRY"],
@@ -241,11 +243,11 @@ export const projects: Project[] = [
   },
   {
     id: "gastarbajter24",
-    press: { label: "GASTARBAJTER24", sub: "SOLO · 2024—NOW" },
+    press: { label: "GASTARBAJTER24", sub: "SOLO · 2023—NOW" },
     title: "GASTARBAJTER24",
     short: "GASTARBAJTER24",
     kind: "product",
-    client: "Solo founder · 2024 → ongoing · Product + Eng",
+    client: "Technical consultant · 2023 → ongoing · Sole engineer",
     blurb:
       "Classifieds marketplace for the Balkan diaspora in Germany. Five listing verticals, trilingual UX (DE/EN/SR), Google OAuth, GDPR cookie consent, SSR meta. Still actively iterating: new verticals, deliverability, growth loops.",
     tags: ["SVELTE_5", "SVELTEKIT_2", "FIREBASE", "TYPESCRIPT", "TAILWIND"],
@@ -282,32 +284,32 @@ export const projects: Project[] = [
     title: "IGELPHONE",
     short: "IGELPHONE",
     kind: "client",
-    client: "Solo build · 2024 → ongoing · Full-Stack + Admin",
+    client: "IGEL Phone Germany · Aug 2025 → ongoing · Senior Technical Consultant",
     blurb:
-      "Phone & accessories storefront for a German reseller. Built end to end solo on SvelteKit + Firebase: bilingual storefront and product catalog, plus a separate admin panel for products, inventory, orders, customers and content. Live at igelphone.de.",
-    tags: ["SVELTEKIT", "TYPESCRIPT", "FIREBASE", "TAILWIND"],
+      "Web product for IGEL Phone, a German phone and accessories reseller. Architected and shipped it end to end as a freelance consultant: a Next.js frontend, a Sanity content studio and Firebase serverless functions, with multilingual, accessible UI. Live at igelphone.de.",
+    tags: ["NEXT.JS", "SANITY", "FIREBASE", "TYPESCRIPT"],
     status: "ONGOING",
     tone: "cyan",
     diagram: "shop",
     link: "https://www.igelphone.de/de",
     span: "default",
     metrics: [
-      { k: "2", v: "apps shipped" },
-      { k: "DE", v: "live store" },
+      { k: "CMS", v: "sanity studio" },
+      { k: "DE", v: "live site" },
     ],
     caseStudy: {
       problem:
-        "A small German phone reseller needed a digital storefront plus an admin tool to run inventory, orders and content, on a solo-developer budget and shipped fast.",
+        "A German phone reseller needed a fast, multilingual web presence whose content the team could run without a developer for every change.",
       approach: [
-        "Shipped the public storefront: bilingual product catalog with filtering and product pages",
-        "Built a separate admin panel app for products, pricing, inventory, orders and customers, with scoped auth",
-        "Designed bilingual (DE/EN) URL routing with hreflang and structured product data for SEO",
-        "Firestore rules + Cloud Functions for the server-side operations",
-        "Owned the entire lifecycle solo: design, infra, deploys and ongoing feature work",
+        "Architected the stack: a Next.js frontend, a Sanity content studio and Firebase serverless functions",
+        "Designed the CMS content models and the typed data flows from studio to page",
+        "Led the design and build of multilingual, accessible UIs",
+        "Built the serverless workflows behind the site's content-driven operations",
+        "Tuned for performance and long-term maintainability",
       ],
       outcome:
-        "Live at igelphone.de since 2024 and actively iterated. The owner runs the business day to day through the admin panel without a developer in the loop.",
-      stack: ["SvelteKit 2", "Svelte 5", "TypeScript", "Firebase", "Firestore", "Cloud Functions", "Tailwind", "hreflang i18n"],
+        "Live at igelphone.de and still iterated as an ongoing freelance engagement since August 2025.",
+      stack: ["Next.js", "React", "Sanity", "Firebase", "Cloud Functions", "TypeScript"],
     },
   },
   {

@@ -13,7 +13,7 @@ export type Relic = {
   note: string;
   link: string;
   tone: Exclude<Tone, "blood">;
-  icon: "terminal" | "monitor";
+  icon: "terminal" | "monitor" | "code";
 };
 
 /** Home of the 2022 terminal site (and its /gui/win98 page) once paullukic.com points here. */
