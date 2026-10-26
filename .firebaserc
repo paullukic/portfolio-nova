@@ -5,7 +5,9 @@
   "targets": {
     "cyberpunk-portfolio-paxhax": {
       "hosting": {
-        "main": ["paullukic-com"]
+        "main": [
+          "paullukic-com"
+        ]
       }
     }
   }
